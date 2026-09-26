@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dyfjgjb18fqek"]
+
+[ext_resource type="Script" uid="uid://b32b1xmylqgl2" path="res://intro.gd" id="1_qeukb"]
+
+[node name="Intro" type="Node2D" unique_id=352291498]
+script = ExtResource("1_qeukb")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=616192018]
+propagate_maximum_size = true
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2000.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1083109807]
+offset_left = 267.0
+offset_top = 63.0
+offset_right = 885.0
+offset_bottom = 499.0
+theme_override_font_sizes/font_size = 32
+text = "Hier könnte ein Text stehen"
+autowrap_mode = 3
+
+[node name="StartLabel" type="Label" parent="." unique_id=1837562941]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 435.0
+offset_top = 389.0
+offset_right = 738.0
+offset_bottom = 441.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Press space to start"
+horizontal_alignment = 1

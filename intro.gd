@@ -1,0 +1,178 @@
+extends Node2D
+
+signal start_pressed
+
+const KITCHEN_SCENE := "res://scenes/kitchen/kitchen.tscn"
+
+## Seconds between each typed character.
+@export var char_delay: float = 0.04
+## Seconds a fully typed text stays on screen before fading out automatically.
+@export var read_delay: float = 2.5
+## Duration of the fade out / fade in.
+@export var fade_time: float = 0.4
+## Lowest alpha of the "press space" label while breathing.
+@export var breathe_alpha: float = 0.35
+## Seconds for one direction of the breathing animation.
+@export var breathe_time: float = 1.2
+
+var _intro_text: Array[String] = [
+	"Es ist 2026 in Hannover, Ende Oktober und Halloween steht vor der Tür.",
+	"Jedoch...",
+	"ist ein schreckliches Unglück in der Stadt vorgefallen.",
+	"Die Fabrik des Lebenselixiers, das weltbekannte Wahrzeichens Hannovers, die des Butterkeks steht lichterloh in Flammen.",
+	"Trauer befällt die Stadt.",
+	"Was wird denn jetzt aus Halloween, ein Fest, in dem Butterkekse so eine große Rolle spielen?",
+	"Mitten in den Trümmern der zerstörten Fabrik tut sich ein Held auf.",
+	"Zu Lebzeiten, kontinuierlich Mitarbeiter des Monats. Aber auch nach dem Tod gewillt, den Hannoveranern ihre Butterkekse zu geben."
+]
+
+enum State {
+	TYPING,
+	READING,
+	FADING_OUT,
+	DONE
+}
+
+var _index: int = 0
+var _char_progress: int = 0
+var _char_timer: float = 0.0
+var _read_timer: float = 0.0
+var _state: State = State.TYPING
+
+var _label: Label
+var _start_label: Label
+var _tween: Tween
+var _breath_tween: Tween
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	_label = $Label
+	_start_label = $StartLabel
+	_start_label.visible = false
+	start_pressed.connect(_on_start_pressed)
+	_begin_text(false)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	match _state:
+		State.TYPING:
+			_type_next(delta)
+		State.READING:
+			_read_timer -= delta
+			if _read_timer <= 0.0:
+				_start_fade_out()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("action_command"):
+		return
+
+	match _state:
+		State.TYPING:
+			_complete_text()
+		State.READING:
+			_advance()
+		State.FADING_OUT:
+			_advance()
+		State.DONE:
+			start_pressed.emit()
+
+
+func _type_next(delta: float) -> void:
+	_char_timer -= delta
+	var text := _current_text()
+	if _char_progress < text.length() and _char_timer <= 0.0:
+		while _char_progress < text.length() and _char_timer <= 0.0:
+			_char_progress += 1
+			_char_timer += char_delay
+		_label.text = text.substr(0, _char_progress)
+
+	if _char_progress >= text.length():
+		_state = State.READING
+		_read_timer = read_delay
+
+
+func _complete_text() -> void:
+	_char_progress = _current_text().length()
+	_label.text = _current_text()
+	_state = State.READING
+	_read_timer = read_delay
+
+
+func _advance() -> void:
+	_kill_tween()
+	_index += 1
+	if _index >= _intro_text.size():
+		_finish_intro()
+	else:
+		_begin_text(false)
+
+
+func _begin_text(with_fade: bool) -> void:
+	_label.text = ""
+	_label.visible = true
+	_char_progress = 0
+	_char_timer = 0.0
+	_state = State.TYPING
+	if with_fade:
+		_label.modulate.a = 0.0
+		_tween = create_tween()
+		_tween.tween_property(_label, "modulate:a", 1.0, fade_time)
+	else:
+		_label.modulate.a = 1.0
+
+
+func _start_fade_out() -> void:
+	_state = State.FADING_OUT
+	_kill_tween()
+	_tween = create_tween()
+	_tween.tween_property(_label, "modulate:a", 0.0, fade_time)
+	_tween.tween_callback(_on_faded_out)
+
+
+func _on_faded_out() -> void:
+	_index += 1
+	if _index >= _intro_text.size():
+		_finish_intro()
+	else:
+		_begin_text(true)
+
+
+func _finish_intro() -> void:
+	_state = State.DONE
+	_kill_tween()
+	_start_label.visible = true
+	_start_label.modulate.a = 0.0
+	_tween = create_tween()
+	_tween.tween_property(_label, "modulate:a", 0.0, fade_time)
+	_tween.parallel().tween_property(_start_label, "modulate:a", 1.0, fade_time)
+	_tween.tween_callback(_hide_label)
+	_tween.tween_callback(_start_breathing)
+
+
+func _hide_label() -> void:
+	_label.visible = false
+
+
+func _start_breathing() -> void:
+	if _breath_tween and _breath_tween.is_valid():
+		_breath_tween.kill()
+	_breath_tween = create_tween().set_loops()
+	_breath_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_breath_tween.tween_property(_start_label, "modulate:a", breathe_alpha, breathe_time)
+	_breath_tween.tween_property(_start_label, "modulate:a", 1.0, breathe_time)
+
+
+func _on_start_pressed() -> void:
+	get_tree().change_scene_to_file(KITCHEN_SCENE)
+
+
+func _current_text() -> String:
+	return _intro_text[_index]
+
+
+func _kill_tween() -> void:
+	if _tween and _tween.is_valid():
+		_tween.kill()
