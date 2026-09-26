@@ -7,12 +7,12 @@ offset_left = 19.0
 offset_top = 17.0
 offset_right = 59.0
 offset_bottom = 57.0
+script = ExtResource("1_gj44a")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=132217919]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_gj44a")
 
 [node name="Number" type="Label" parent="TextureRect" unique_id=987267383]
 layout_mode = 1
