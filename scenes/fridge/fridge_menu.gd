@@ -68,7 +68,7 @@ func _on_recipe_item_selected(index: int) -> void:
 
 func _show_recipe_details(recipe: Recipe) -> void:
 	var lines: PackedStringArray = ["[b]%s[/b]" % recipe.result.name, ""]
-	lines.append("[color=#9aa4b8]Ingredients[/color]")
+	lines.append("[color=#9aa4b8]Zutaten[/color]")
 	for ingredient in recipe.incredients:
 		lines.append("  • %s" % ingredient.name)
 	_details.text = "\n".join(lines)
