@@ -12,6 +12,8 @@ var _label_tween: Tween
 
 var _player_in_range = false
 
+@export var recipe : Recipe
+
 signal eggs_cracked
 
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +26,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if _player_in_range:
-		if Input.is_action_just_pressed("action_command"):
+		if (Input.is_action_just_pressed("action_command") && InventorySingleton.RemoveByRecipe(recipe)):
 			$MiniGame.started = true
 			$MiniGame.visible = true
 	if $MiniGame.started:
@@ -56,6 +58,7 @@ func _egg_cracked(amount: int):
 		eggs_cracked.emit()
 		if player != null:
 			player.unfreeze()
+		InventorySingleton.addAmount(recipe.result, 1)
 
 
 # Quick scale pop so it's obvious the counter updated.

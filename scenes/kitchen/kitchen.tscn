@@ -3,12 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://r52huynsbjhm" path="res://assets/B461B10C-BD78-471F-9195-AE052D5ECA54.png" id="1_o4r6q"]
 [ext_resource type="PackedScene" uid="uid://ci8y0oh6neahc" path="res://scenes/player/player.tscn" id="2_madu1"]
 [ext_resource type="PackedScene" uid="uid://dujqskcbhlui5" path="res://scenes/egg_cracking/egg_cracking.tscn" id="3_o4r6q"]
+[ext_resource type="Resource" uid="uid://gkgvlqy2m1rx" path="res://assets/Recipes/geschlagenes_Ei.tres" id="5_m0td3"]
 [ext_resource type="PackedScene" uid="uid://dnebc8xp5pvv" path="res://scenes/knead/knead.tscn" id="5_yi3jr"]
 [ext_resource type="PackedScene" uid="uid://c3lcwuumce3w2" path="res://scenes/fridge/fridge.tscn" id="7_8xxd6"]
 [ext_resource type="PackedScene" uid="uid://b0w25x2iceuhx" path="res://scenes/mixing/mixing.tscn" id="7_a4owj"]
 [ext_resource type="PackedScene" uid="uid://cevx1fy76752r" path="res://scenes/oven/oven.tscn" id="8_a4owj"]
-[ext_resource type="PackedScene" uid="uid://co6xdthwrvk6o" path="res://scenes/computer/computer.tscn" id="9_comp"]
 [ext_resource type="PackedScene" uid="uid://b0rhi4t10fqpf" path="res://assets/Inventar.tscn" id="8_lmija"]
+[ext_resource type="PackedScene" uid="uid://co6xdthwrvk6o" path="res://scenes/computer/computer.tscn" id="9_comp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 resource_local_to_scene = true
@@ -66,6 +67,7 @@ position_smoothing_enabled = true
 [node name="EggCracking" parent="." unique_id=739322368 node_paths=PackedStringArray("player") instance=ExtResource("3_o4r6q")]
 position = Vector2(463, 557)
 player = NodePath("../Player")
+recipe = ExtResource("5_m0td3")
 
 [node name="Knead" parent="." unique_id=971235742 node_paths=PackedStringArray("player") instance=ExtResource("5_yi3jr")]
 position = Vector2(938, 561)
@@ -78,7 +80,7 @@ player = NodePath("../Player")
 [node name="Oven" parent="." unique_id=1551289359 instance=ExtResource("8_a4owj")]
 position = Vector2(817, 41)
 
-[node name="Computer" parent="." instance=ExtResource("9_comp")]
+[node name="Computer" parent="." unique_id=270510342 instance=ExtResource("9_comp")]
 position = Vector2(1100, 100)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1995790907]
