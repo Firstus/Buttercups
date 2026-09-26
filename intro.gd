@@ -23,7 +23,7 @@ var _intro_text: Array[String] = [
 	"Trauer befällt die Stadt.",
 	"Was wird denn jetzt aus Halloween, ein Fest, in dem Butterkekse so eine große Rolle spielen?",
 	"Mitten in den Trümmern der zerstörten Fabrik tut sich ein Held auf.",
-	"Zu Lebzeiten, kontinuierlich Mitarbeiter des Monats. Aber auch nach dem Tod gewillt, den Hannoveranern ihre Butterkekse zu geben."
+	"Zu Lebzeiten, kontinuierlich Mitarbeiter des Monats. Aber auch nach dem Tod gewillt, den Hannoveranern ihre Butterkekse zu backen."
 ]
 
 enum State {
