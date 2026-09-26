@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://b0rhi4t10fqpf"]
+
+[ext_resource type="PackedScene" uid="uid://c6jlrh416y66j" path="res://assets/inventar_slot.tscn" id="1_f46na"]
+[ext_resource type="Script" uid="uid://cqqncslvof2qi" path="res://scripts/inventar.gd" id="1_me4uv"]
+
+[node name="Control" type="Control" unique_id=1274404498]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Inventar" type="Panel" parent="." unique_id=1512562231]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -104.0
+offset_right = 315.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_me4uv")
+
+[node name="InventarSlot" parent="Inventar" unique_id=1792738595 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 20.0
+offset_right = 56.0
+offset_bottom = 60.0
+
+[node name="InventarSlot2" parent="Inventar" unique_id=102252149 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 20.0
+offset_right = 115.0
+offset_bottom = 60.0
+
+[node name="InventarSlot3" parent="Inventar" unique_id=647769108 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 20.0
+offset_right = 171.0
+offset_bottom = 60.0
+
+[node name="InventarSlot4" parent="Inventar" unique_id=1520917191 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 20.0
+offset_right = 227.0
+offset_bottom = 60.0
+
+[node name="InventarSlot5" parent="Inventar" unique_id=1177206115 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 20.0
+offset_right = 283.0
+offset_bottom = 60.0
+
+[node name="InventarSlot6" parent="Inventar" unique_id=1395938369 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 299.0
+offset_top = 20.0
+offset_right = 339.0
+offset_bottom = 60.0
+
+[node name="InventarSlot7" parent="Inventar" unique_id=262226198 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 20.0
+offset_right = 395.0
+offset_bottom = 60.0
+
+[node name="InventarSlot8" parent="Inventar" unique_id=1244454975 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 411.0
+offset_top = 20.0
+offset_right = 451.0
+offset_bottom = 60.0
+
+[node name="InventarSlot9" parent="Inventar" unique_id=1257722715 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 20.0
+offset_right = 507.0
+offset_bottom = 60.0
+
+[node name="InventarSlot10" parent="Inventar" unique_id=385257171 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 523.0
+offset_top = 20.0
+offset_right = 563.0
+offset_bottom = 60.0
+
+[node name="InventarSlot11" parent="Inventar" unique_id=897076627 instance=ExtResource("1_f46na")]
+layout_mode = 0
+offset_left = 579.0
+offset_top = 20.0
+offset_right = 619.0
+offset_bottom = 60.0

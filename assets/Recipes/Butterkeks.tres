@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://oqbimoc1pe5o"]
+
+[ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="1_wuq5i"]
+[ext_resource type="Resource" uid="uid://dpjdfr2hy5hu7" path="res://assets/Items/gemischtes_Mehl.tres" id="2_2ss41"]
+[ext_resource type="Script" uid="uid://bd5httcmxuhxm" path="res://scripts/Recipe.gd" id="2_lkliq"]
+[ext_resource type="Resource" uid="uid://b0hmi8ckjpyej" path="res://assets/Items/verarbeitetes_Ei.tres" id="3_b0b4j"]
+[ext_resource type="Resource" uid="uid://c7ivbof3nosjf" path="res://assets/Items/Butter.tres" id="4_wm3c8"]
+[ext_resource type="Resource" uid="uid://bsmxh21tvjq1c" path="res://assets/Items/Butterkeks.tres" id="5_u3rbm"]
+
+[resource]
+script = ExtResource("2_lkliq")
+incredients = Array[ExtResource("1_wuq5i")]([ExtResource("2_2ss41"), ExtResource("3_b0b4j"), ExtResource("4_wm3c8")])
+result = ExtResource("5_u3rbm")
+metadata/_custom_type_script = "uid://bd5httcmxuhxm"

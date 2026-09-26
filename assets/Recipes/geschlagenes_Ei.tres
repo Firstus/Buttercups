@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://gkgvlqy2m1rx"]
+
+[ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="1_ldstv"]
+[ext_resource type="Script" uid="uid://bd5httcmxuhxm" path="res://scripts/Recipe.gd" id="2_st4kq"]
+[ext_resource type="Resource" uid="uid://bl2mmd3xbslgg" path="res://assets/Items/Ei.tres" id="2_x1drv"]
+[ext_resource type="Resource" uid="uid://b0hmi8ckjpyej" path="res://assets/Items/verarbeitetes_Ei.tres" id="3_e7ft6"]
+
+[resource]
+script = ExtResource("2_st4kq")
+incredients = Array[ExtResource("1_ldstv")]([ExtResource("2_x1drv")])
+result = ExtResource("3_e7ft6")
+metadata/_custom_type_script = "uid://bd5httcmxuhxm"
