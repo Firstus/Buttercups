@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://bctyyn0lhjfay"]
 
-[ext_resource type="Texture2D" uid="uid://cbhbmvrvua0on" path="res://assets/kueche.png" id="1_5wy2p"]
+[ext_resource type="Texture2D" uid="uid://r52huynsbjhm" path="res://assets/B461B10C-BD78-471F-9195-AE052D5ECA54.png" id="1_o4r6q"]
 [ext_resource type="PackedScene" uid="uid://ci8y0oh6neahc" path="res://scenes/player/player.tscn" id="2_madu1"]
 [ext_resource type="PackedScene" uid="uid://dujqskcbhlui5" path="res://scenes/egg_cracking/egg_cracking.tscn" id="3_o4r6q"]
+[ext_resource type="Texture2D" uid="uid://dqqayq2lllvdr" path="res://assets/949CFD1C-1C6B-4B0F-9053-163800B87464.png" id="4_7wsgf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 resource_local_to_scene = true
@@ -10,24 +11,31 @@ size = Vector2(39, 941)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wy2p"]
 resource_local_to_scene = true
-size = Vector2(1009, 62)
+size = Vector2(1539, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qyfo"]
+size = Vector2(632.5, 233)
 
 [node name="Kitchen" type="Node2D" unique_id=1758529359]
 
 [node name="Kueche" type="Sprite2D" parent="." unique_id=1896883199]
 texture_filter = 1
 position = Vector2(595, 342)
-scale = Vector2(4, 4)
-texture = ExtResource("1_5wy2p")
+texture = ExtResource("1_o4r6q")
+
+[node name="Fridge" type="Sprite2D" parent="." unique_id=994812581]
+position = Vector2(-10.999999, 59)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_7wsgf")
 
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=1140330344]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=161169841]
-position = Vector2(100.5, 346.5)
+position = Vector2(-153, 369)
 shape = SubResource("RectangleShape2D_5gxde")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries" unique_id=2015733727]
-position = Vector2(1079, 364)
+position = Vector2(1383, 362)
 shape = SubResource("RectangleShape2D_5gxde")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries" unique_id=937835999]
@@ -35,12 +43,17 @@ position = Vector2(588.5, 830)
 shape = SubResource("RectangleShape2D_5wy2p")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries" unique_id=1854996692]
-position = Vector2(591, -135)
+position = Vector2(618, 51)
 shape = SubResource("RectangleShape2D_5wy2p")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Boundaries" unique_id=1304191290]
+position = Vector2(697.25, 615.5)
+shape = SubResource("RectangleShape2D_4qyfo")
 
 [node name="Player" parent="." unique_id=2021192100 instance=ExtResource("2_madu1")]
 position = Vector2(589, 347)
 max_speed = 250.0
+acceleration = 1200.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1473340324]
 position = Vector2(-589, -347)
@@ -48,5 +61,5 @@ anchor_mode = 0
 position_smoothing_enabled = true
 
 [node name="EggCracking" parent="." unique_id=739322368 node_paths=PackedStringArray("player") instance=ExtResource("3_o4r6q")]
-position = Vector2(259, 631)
+position = Vector2(19, 583)
 player = NodePath("../Player")
