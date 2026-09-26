@@ -13,6 +13,8 @@ script = ExtResource("1_gj44a")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Number" type="Label" parent="TextureRect" unique_id=987267383]
 layout_mode = 1
@@ -27,6 +29,5 @@ offset_right = 10.0
 offset_bottom = 8.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "11"
 horizontal_alignment = 1
 vertical_alignment = 1

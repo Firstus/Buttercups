@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Inventar" type="Panel" parent="." unique_id=1512562231]
+[node name="Inventar" type="Panel" parent="." unique_id=1512562231 node_paths=PackedStringArray("slots")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -25,6 +25,7 @@ offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_me4uv")
+slots = [NodePath("InventarSlot"), NodePath("InventarSlot2"), NodePath("InventarSlot3"), NodePath("InventarSlot4"), NodePath("InventarSlot5"), NodePath("InventarSlot6"), NodePath("InventarSlot7"), NodePath("InventarSlot8"), NodePath("InventarSlot9"), NodePath("InventarSlot10"), NodePath("InventarSlot11")]
 
 [node name="InventarSlot" parent="Inventar" unique_id=1792738595 instance=ExtResource("1_f46na")]
 layout_mode = 0

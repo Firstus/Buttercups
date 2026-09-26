@@ -1,10 +1,10 @@
 class_name InventorySlot
-extends TextureRect
+extends Panel
 
 func Setup(item: Item, amount: int) -> void:
 	$TextureRect.texture = item.icon
-	$Number.text = amount
+	$TextureRect/Number.text = str(amount)
 
-func reset() -> void:
+func resetSlot() -> void:
 	$TextureRect.texture = null
-	$Number.text = ""
+	$TextureRect/Number.text = ""

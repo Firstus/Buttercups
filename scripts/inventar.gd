@@ -24,7 +24,7 @@ func removeAmount(item: Item, amount: int) -> void:
 
 func updateInventoryUi() -> void:
 	for i in range(slots.size()):
-		slots[i].reset()
+		slots[i].resetSlot()
 	var keyList = items.keys()
 	for i in range(items.size()):
 		var currentKey = keyList[i]
