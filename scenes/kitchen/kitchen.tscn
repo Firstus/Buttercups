@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dujqskcbhlui5" path="res://scenes/egg_cracking/egg_cracking.tscn" id="3_o4r6q"]
 [ext_resource type="Texture2D" uid="uid://dqqayq2lllvdr" path="res://assets/949CFD1C-1C6B-4B0F-9053-163800B87464.png" id="4_7wsgf"]
 [ext_resource type="PackedScene" uid="uid://dnebc8xp5pvv" path="res://scenes/knead/knead.tscn" id="5_yi3jr"]
+[ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="6_hwcho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 resource_local_to_scene = true
@@ -62,9 +63,13 @@ anchor_mode = 0
 position_smoothing_enabled = true
 
 [node name="EggCracking" parent="." unique_id=739322368 node_paths=PackedStringArray("player") instance=ExtResource("3_o4r6q")]
-position = Vector2(19, 583)
+position = Vector2(463, 557)
 player = NodePath("../Player")
 
 [node name="Knead" parent="." unique_id=971235742 node_paths=PackedStringArray("player") instance=ExtResource("5_yi3jr")]
 position = Vector2(674, 456)
 player = NodePath("../Player")
+
+[node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("6_hwcho")]
+visible = false
+position = Vector2(451, 534)

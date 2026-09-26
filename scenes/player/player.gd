@@ -9,7 +9,6 @@ extends CharacterBody2D
 
 var _frozen: bool = false
 
-
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("player_left", "player_right", "player_up", "player_down")
 	var target_velocity := direction * max_speed

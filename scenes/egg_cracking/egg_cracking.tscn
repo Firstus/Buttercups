@@ -1,25 +1,23 @@
 [gd_scene format=3 uid="uid://dujqskcbhlui5"]
 
 [ext_resource type="Script" uid="uid://bsbefl54wcc3t" path="res://scenes/egg_cracking/egg_cracking.gd" id="1_1rfmu"]
-[ext_resource type="Texture2D" uid="uid://dfrfja56p5elc" path="res://assets/egg_table.png" id="1_7w8dh"]
+[ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="2_y8sme"]
 [ext_resource type="Texture2D" uid="uid://dxi34dlpqryvn" path="res://assets/egg_crack_gauge.png" id="3_me04q"]
 [ext_resource type="Script" uid="uid://bq7q2nk0gmkha" path="res://scenes/egg_cracking/mini_game.gd" id="3_y8sme"]
+[ext_resource type="Texture2D" uid="uid://ba4hp3k4k7evr" path="res://assets/A4E277EC-FAD9-461D-BBEB-3AE324796FE4.png" id="5_lsm5j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
-size = Vector2(294, 264)
+size = Vector2(129, 223)
 
 [node name="EggCracking" type="Node2D" unique_id=739322368]
 script = ExtResource("1_1rfmu")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1369609669]
-texture_filter = 1
-scale = Vector2(4, 4)
-texture = ExtResource("1_7w8dh")
+[node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("2_y8sme")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=745983442]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1474276277]
-position = Vector2(19, 0)
+position = Vector2(-2.5, -38.5)
 shape = SubResource("RectangleShape2D_5gxde")
 
 [node name="Label" type="Label" parent="." unique_id=588338451]
@@ -57,6 +55,23 @@ position = Vector2(109, -12)
 position = Vector2(108, 8)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=139577869]
+
+[node name="Eggs" type="Node2D" parent="." unique_id=160143600]
+
+[node name="Sprite2D" type="Sprite2D" parent="Eggs" unique_id=303654362]
+position = Vector2(31, -18)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_lsm5j")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Eggs" unique_id=961710762]
+position = Vector2(-21, -12)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_lsm5j")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Eggs" unique_id=931801044]
+position = Vector2(15, 18)
+scale = Vector2(-0.25, 0.25)
+texture = ExtResource("5_lsm5j")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
