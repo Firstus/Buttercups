@@ -17,6 +17,7 @@ signal eggs_cracked
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$MiniGame.visible = false
+	$Eggs.visible = false
 	$MiniGame.connect("egg_cracked", _egg_cracked)
 
 
@@ -27,6 +28,8 @@ func _process(delta: float) -> void:
 			$MiniGame.started = true
 			$MiniGame.visible = true
 	if $MiniGame.started:
+		$Eggs.visible = true
+		$InteractionElement.visible = false
 		if player != null:
 			player.freeze()
 
@@ -49,6 +52,7 @@ func _egg_cracked(amount: int):
 		$MiniGame.started = false
 		$MiniGame.visible = false
 		$Label.visible = false
+		$Eggs.visible = false
 		eggs_cracked.emit()
 		if player != null:
 			player.unfreeze()

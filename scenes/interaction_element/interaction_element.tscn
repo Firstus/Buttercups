@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cfsiufv2epym3"]
+
+[ext_resource type="Script" uid="uid://w7ppw7ywd0fa" path="res://scenes/interaction_element/interaction_element.gd" id="1_ned4h"]
+[ext_resource type="Texture2D" uid="uid://c88qj3awlxc7s" path="res://assets/particle_effect.png" id="2_dxsbr"]
+[ext_resource type="Shader" uid="uid://b4r7fmufbg4t8" path="res://scenes/interaction_element/interaction_element.gdshader" id="3_glow"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glow"]
+shader = ExtResource("3_glow")
+shader_parameter/core_color = Color(0.85, 1, 1, 1)
+shader_parameter/mid_color = Color(0.25, 0.8, 1, 1)
+shader_parameter/edge_color = Color(0.55, 0.35, 1, 1)
+shader_parameter/core_size = 0.35
+shader_parameter/edge_softness = 0.5
+shader_parameter/rim_strength = 0.45
+shader_parameter/glow_strength = 1.15
+shader_parameter/sheen_speed = 0.4
+shader_parameter/sheen_strength = 0.12
+
+[sub_resource type="Gradient" id="Gradient_g05f8"]
+colors = PackedColorArray(0.546875, 0.546875, 0.546875, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5gxde"]
+gradient = SubResource("Gradient_g05f8")
+width = 128
+height = 128
+
+[sub_resource type="Curve" id="Curve_aucdh"]
+_data = [Vector2(0.10360359, 0), 0.0, 0.0, 0, 0, Vector2(0.3333333, 0.8571429), 0.0, 0.0, 0, 0, Vector2(0.8423423, 0.93233085), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_iri3n"]
+curve = SubResource("Curve_aucdh")
+
+[sub_resource type="Gradient" id="Gradient_dxsbr"]
+colors = PackedColorArray(0.7708333, 0.7708333, 0.7708333, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dxsbr"]
+gradient = SubResource("Gradient_dxsbr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5gxde"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(32, 32, 1)
+gravity = Vector3(0, -38, 0)
+scale_min = 0.19999999
+scale_max = 0.39999998
+color_ramp = SubResource("GradientTexture1D_dxsbr")
+alpha_curve = SubResource("CurveTexture_iri3n")
+turbulence_enabled = true
+
+[node name="InteractionElement" type="Node2D" unique_id=27823930]
+script = ExtResource("1_ned4h")
+max_alpha = 0.68
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=170587668]
+material = SubResource("ShaderMaterial_glow")
+texture = SubResource("GradientTexture2D_5gxde")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1220516403]
+amount = 16
+texture = ExtResource("2_dxsbr")
+process_material = SubResource("ParticleProcessMaterial_5gxde")
