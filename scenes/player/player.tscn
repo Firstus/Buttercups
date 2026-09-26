@@ -1,17 +1,82 @@
 [gd_scene format=3 uid="uid://ci8y0oh6neahc"]
 
-[ext_resource type="Texture2D" uid="uid://d8l01aprxkhu" path="res://icon.svg" id="1_8afob"]
 [ext_resource type="Script" uid="uid://k8xfschq8lnj" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Texture2D" uid="uid://dpo8jseynvw7o" path="res://assets/Character/walkingcycle.png" id="2_dovo2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmlin"]
+atlas = ExtResource("2_dovo2")
+region = Rect2(0, 0, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvxji"]
+atlas = ExtResource("2_dovo2")
+region = Rect2(100, 0, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p47bc"]
+atlas = ExtResource("2_dovo2")
+region = Rect2(200, 0, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
+atlas = ExtResource("2_dovo2")
+region = Rect2(300, 0, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0owmy"]
+atlas = ExtResource("2_dovo2")
+region = Rect2(400, 0, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
+atlas = ExtResource("2_dovo2")
+region = Rect2(500, 0, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gtgg"]
+atlas = ExtResource("2_dovo2")
+region = Rect2(600, 0, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h17s1"]
+atlas = ExtResource("2_dovo2")
+region = Rect2(700, 0, 100, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5gxde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmlin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvxji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p47bc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75vfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0owmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qek5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gtgg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h17s1")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
-size = Vector2(126, 128)
+size = Vector2(82, 100)
 
 [node name="Player" type="CharacterBody2D" unique_id=2021192100 groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_dovo2")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1654852197]
-texture = ExtResource("1_8afob")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=987427218]
+sprite_frames = SubResource("SpriteFrames_5gxde")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2135729005]
+position = Vector2(0, 23)
 shape = SubResource("RectangleShape2D_5gxde")
