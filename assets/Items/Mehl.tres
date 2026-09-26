@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_5vcla")
 name = "Mehl"
+cost = 2
 metadata/_custom_type_script = "uid://bwjjrhk07p45h"

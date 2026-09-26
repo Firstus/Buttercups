@@ -1,20 +1,6 @@
 extends Node2D
 
 const ITEM_DIR := "res://assets/Items"
-const DEFAULT_PRICE := 1
-# TODO: Replace with real prices once an economy/money system exists.
-const PLACEHOLDER_PRICES := {
-	"Backpulver": 3,
-	"Blaubeerkeks": 8,
-	"Blaubeeren": 5,
-	"Butter": 4,
-	"Butterkeks": 6,
-	"Ei": 2,
-	"gemischtes Mehl": 4,
-	"Mehl": 2,
-	"aufgeschlagenes Ei": 3,
-	"Zucker": 3,
-}
 
 ## Items the computer offers. Every item in ITEM_DIR is offered when left empty.
 @export var on_sale: Array[Item] = []
@@ -50,7 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _open_menu() -> void:
 	if _menu.is_open():
 		return
-	_menu.open(_items, _price_of)
+	_menu.open(_items, InventorySingleton.money)
 	$Label.visible = false
 	if player != null:
 		player.freeze()
@@ -63,14 +49,10 @@ func _close_menu() -> void:
 		player.unfreeze()
 
 
-# TODO: Deduct money and store the purchase once the economy/inventory systems exist.
-func _on_item_purchased(_item: Item, _amount: int) -> void:
-	pass
-
-
-# TODO: Replace with real prices once an economy/money system exists.
-func _price_of(item: Item) -> int:
-	return int(PLACEHOLDER_PRICES.get(item.name, DEFAULT_PRICE))
+# TODO: Put the bought items into the inventory/fridge once storage is wired up.
+func _on_item_purchased(_item: Item, _amount: int, total: int) -> void:
+	InventorySingleton.changeMoney(-total)
+	_menu.set_money(InventorySingleton.money)
 
 
 func _load_items() -> void:

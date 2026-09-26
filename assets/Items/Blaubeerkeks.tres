@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_c50df")
 name = "Blaubeerkeks"
+cost = 8
 metadata/_custom_type_script = "uid://bwjjrhk07p45h"

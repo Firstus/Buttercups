@@ -76,10 +76,21 @@ theme_override_constants/margin_bottom = 22
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="Panel/Margin/VBox"]
+[node name="Header" type="HBoxContainer" parent="Panel/Margin/VBox"]
 layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/Margin/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Shop"
+
+[node name="Money" type="Label" parent="Panel/Margin/VBox/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.45, 1)
+theme_override_font_sizes/font_size = 20
+text = "Money 0"
+vertical_alignment = 1
 
 [node name="Body" type="HBoxContainer" parent="Panel/Margin/VBox"]
 layout_mode = 2
