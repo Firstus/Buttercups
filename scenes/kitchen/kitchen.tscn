@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="6_hwcho"]
 [ext_resource type="PackedScene" uid="uid://c3lcwuumce3w2" path="res://scenes/fridge/fridge.tscn" id="7_8xxd6"]
 [ext_resource type="PackedScene" uid="uid://b0w25x2iceuhx" path="res://scenes/mixing/mixing.tscn" id="7_a4owj"]
+[ext_resource type="PackedScene" uid="uid://cevx1fy76752r" path="res://scenes/oven/oven.tscn" id="8_a4owj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 resource_local_to_scene = true
@@ -75,3 +76,6 @@ position = Vector2(451, 534)
 
 [node name="Mixing" parent="." unique_id=1541803609 instance=ExtResource("7_a4owj")]
 position = Vector2(441, 115)
+
+[node name="Oven" parent="." unique_id=1551289359 instance=ExtResource("8_a4owj")]
+position = Vector2(817, 41)

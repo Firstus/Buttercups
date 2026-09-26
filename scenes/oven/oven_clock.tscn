@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/oven/oven_clock.gd" id="1_clock"]
+
+[node name="OvenClock" type="Node2D" unique_id=1466937246]
+script = ExtResource("1_clock")

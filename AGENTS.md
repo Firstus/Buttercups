@@ -77,6 +77,7 @@ scenes/
   player/                     # CharacterBody2D player + AnimatedSprite2D + collision
   fridge/                     # fridge Area2D + recipe menu UI
   knead/  mixing/  egg_cracking/  # mini-game stations
+  oven/                       # timed bake station (Timer + spawned oven_clock.tscn)
   interaction_element/        # reusable glowing "interact" marker (shader + breathing tween)
 ```
 
@@ -86,8 +87,8 @@ scenes/
 - Each scene keeps its script next to it (`scenes/<name>/<name>.gd` + `<name>.tscn`). Reusable data/UI classes live in `scripts/` (`Item`, `Recipe`, `InventorySlot`).
 - No autoloads/singletons. Stations get the player either from the exported `player` NodePath wired in `kitchen.tscn` or via `get_tree().get_first_node_in_group("player")`. The player node is in the `player` group.
 - Input actions are defined in `project.godot`: `player_left/right/up/down` (arrow keys), `action_command` (Space; interact/confirm/advance), `ui_cancel` (Escape; close menus).
-- Interaction pattern: an `Area2D` tracks the player with `body_entered`/`body_exited` plus `is_in_group("player")`, shows a prompt label, Space starts the mini-game, `player.freeze()` runs while it is active, `player.unfreeze()` when it ends. Completion is reported through signals (`egg_cracked`, `knead_completed`, `mix_complete`, `recipe_selected`).
-- `player.freeze()` stops movement and resets the walk animation to the idle frame; always pair it with `unfreeze()`.
+- Interaction pattern: an `Area2D` tracks the player with `body_entered`/`body_exited` plus `is_in_group("player")`, shows a prompt label, Space starts the mini-game, `player.freeze()` runs while it is active, `player.unfreeze()` when it ends. Completion is reported through signals (`egg_cracked`, `knead_completed`, `mix_complete`, `recipe_selected`, `baking_finished`).
+- `player.freeze()` stops movement and resets the walk animation to the idle frame; always pair it with `unfreeze()`. The oven is the exception: it is timer-based (a `Timer` node drives the countdown), never freezes the player, and spawns `scenes/oven/oven_clock.tscn` as a world-space indicator driven by `set_progress()` while the bake runs.
 - Player animation is handled in `player.gd::_update_animation`: frame 0 while idle, the walk cycle while moving, `flip_h` when moving left. The scene node is named `Sprite2D` but is an `AnimatedSprite2D`.
 - Items/recipes are custom `Resource`s (`scripts/Item.gd`, `scripts/Recipe.gd`) stored in `assets/Items` and `assets/Recipes`. The ingredients array is spelled `Recipe.incredients` (sic) and used everywhere. `fridge.gd` loads every `*.tres` in `assets/Recipes` at runtime.
 - Mini-games read input in `_process`/`_unhandled_input`; hints use `RichTextLabel` BBCode (e.g. `[color=#8bc34a]`, `[b]`).
@@ -98,6 +99,6 @@ scenes/
 ## Known gaps
 
 - Fridge contents and the recipe-unlock list are hardcoded placeholders in `scenes/fridge/fridge.gd` (see its TODOs); selecting a recipe only shows details and does not craft anything yet.
-- `scenes/mixing/mixing.gd` does not put the mixed result into the inventory yet.
+- `scenes/mixing/mixing.gd` does not put the mixed result into the inventory yet, and the oven's finished bake is not handed to any crafting/inventory system.
 - The inventory (`assets/Inventar.tscn`, `scripts/inventar.gd`) is not instanced in the kitchen yet.
 - `scripts/SellBucked.gd` and `scenes/egg_cracking/area_2d.gd` are empty stubs.
