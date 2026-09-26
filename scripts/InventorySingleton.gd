@@ -2,7 +2,10 @@ extends Node
 #PLAYER
 var items : Dictionary[Item, int]
 
+var money : int = 1000
+
 signal OnInventoryChanged
+signal OnMoneyChanged
 
 func addAmount(item: Item, amount: int) -> void:
 	if(items.has(item)):
@@ -33,3 +36,7 @@ func removeAmount(item: Item, amount: int) -> bool:
 		OnInventoryChanged.emit()
 		return true
 	return false
+
+func changeMoney(amount: int) -> void:
+	money += amount
+	OnMoneyChanged.emit()
