@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(126, 128)
 
-[node name="Player" type="CharacterBody2D" unique_id=2021192100]
+[node name="Player" type="CharacterBody2D" unique_id=2021192100 groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_dovo2")
 

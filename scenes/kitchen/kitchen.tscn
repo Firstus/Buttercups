@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cbhbmvrvua0on" path="res://assets/kueche.png" id="1_5wy2p"]
 [ext_resource type="PackedScene" uid="uid://ci8y0oh6neahc" path="res://scenes/player/player.tscn" id="2_madu1"]
+[ext_resource type="PackedScene" uid="uid://dujqskcbhlui5" path="res://scenes/egg_cracking/egg_cracking.tscn" id="3_o4r6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 resource_local_to_scene = true
@@ -45,3 +46,6 @@ max_speed = 250.0
 position = Vector2(-589, -347)
 anchor_mode = 0
 position_smoothing_enabled = true
+
+[node name="EggCracking" parent="." unique_id=739322368 instance=ExtResource("3_o4r6q")]
+position = Vector2(259, 631)
