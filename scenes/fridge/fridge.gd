@@ -2,21 +2,11 @@ extends Area2D
 
 const RECIPE_DIR := "res://assets/Recipes"
 # TODO: Replace with real unlock progress once crafting/progression exists.
-const ENABLED_RECIPE_PATHS := ["res://assets/Recipes/Butterkeks.tres"]
+const ENABLED_RECIPE_PATHS := ["res://assets/Recipes/Butterkeks.tres", "res://assets/Recipes/gemischtes_Mehl.tres", "res://assets/Recipes/geschlagenes_Ei.tres"]
 
 @export var player: Node
 
 @onready var _menu: FridgeMenu = $Menu
-
-# TODO: Replace with the fridge's real storage once it exists.
-var _contents: Dictionary[Item, int] = {
-	preload("res://assets/Items/Mehl.tres") as Item: 3,
-	preload("res://assets/Items/Backpulver.tres") as Item: 1,
-	preload("res://assets/Items/Zucker.tres") as Item: 2,
-	preload("res://assets/Items/Ei.tres") as Item: 4,
-	preload("res://assets/Items/Butter.tres") as Item: 2,
-	preload("res://assets/Items/Blaubeeren.tres") as Item: 5,
-}
 
 var _recipes: Array[Recipe] = []
 var _player_in_range := false
@@ -51,7 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _open_menu() -> void:
 	if _menu.is_open():
 		return
-	_menu.open(_contents, _recipes, _is_recipe_enabled)
+	_menu.open(FridgeSingleton.items, _recipes, _is_recipe_enabled)
 	$Label.visible = false
 	if player != null:
 		player.freeze()

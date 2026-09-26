@@ -1,7 +1,8 @@
-extends Panel
-
-@export var slots : Array[InventorySlot]
+extends Node
+#PLAYER
 var items : Dictionary[Item, int]
+
+signal OnInventoryChanged
 
 func addAmount(item: Item, amount: int) -> void:
 	if(items.has(item)):
@@ -10,7 +11,7 @@ func addAmount(item: Item, amount: int) -> void:
 		items.set(item, value)
 	else:
 		items[item] = amount
-	updateInventoryUi()
+	OnInventoryChanged.emit()
 	
 
 func RemoveByRecipe(recipe: Recipe) -> bool:
@@ -29,15 +30,6 @@ func removeAmount(item: Item, amount: int) -> bool:
 			items.erase(item)
 		else:
 			items.set(item, value)
-		updateInventoryUi()
+		OnInventoryChanged.emit()
 		return true
 	return false
-
-func updateInventoryUi() -> void:
-	for i in range(slots.size()):
-		slots[i].resetSlot()
-	var keyList = items.keys()
-	for i in range(items.size()):
-		var currentKey = keyList[i]
-		slots[i].Setup(currentKey, items[currentKey])
-	
