@@ -29,18 +29,24 @@ var _character_patterns = [
 	["W", "S", "W", "S"]
 ]
 
+var knead_text: Node
+var knead_level: Node
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	knead_level = $CanvasLayer/KneadLevel
+	knead_text = $CanvasLayer/VBoxContainer/RichTextLabel
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
 	$Area2D.body_entered.connect(_on_area_2d_body_entered)
 	$Area2D.body_exited.connect(_on_area_2d_body_exited)
-	$RichTextLabel.bbcode_enabled = true
-	$RichTextLabel.text = ""
+	knead_text.bbcode_enabled = true
+	knead_text.text = ""
 	$Label.visible = false
+
 	_update_level_label()
 	
-	_start_minigame()
+	#_start_minigame()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -100,7 +106,7 @@ func _complete_minigame() -> void:
 	_is_active = false
 	_current_pattern = []
 	_input_index = 0
-	$RichTextLabel.text = "[color=#8bc34a][b]Kneading done![/b][/color]"
+	knead_text.text = "[color=#8bc34a][b]Kneading done![/b][/color]"
 	if player != null:
 		player.unfreeze()
 	knead_completed.emit()
@@ -117,11 +123,11 @@ func _update_pattern_label() -> void:
 			parts.append("[color=#ffd54f][b]%s[/b][/color]" % token)
 		else:
 			parts.append("[color=#9e9e9e]%s[/color]" % token)
-	$RichTextLabel.text = " - ".join(parts)
+	knead_text.text = " - ".join(parts)
 
 
 func _update_level_label() -> void:
-	$KneadLevel.text = "Knetlevel: %d / %d" % [_knead_level, goal_level]
+	knead_level.text = "Knetlevel: %d / %d" % [_knead_level, goal_level]
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -129,7 +135,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		_player_in_range = true
 		if not _is_active:
 			$Label.visible = true
-			$RichTextLabel.text = "Press [b]Space[/b] to knead"
+			knead_text.text = "Press [b]Space[/b] to knead"
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
@@ -137,4 +143,4 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		_player_in_range = false
 		if not _is_active:
 			$Label.visible = false
-			$RichTextLabel.text = ""
+			knead_text.text = ""

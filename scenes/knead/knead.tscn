@@ -19,14 +19,25 @@ text = "Hier könnte was zum Kneten liegen"
 position = Vector2(137, 33)
 shape = SubResource("RectangleShape2D_5gxde")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1050767593]
-offset_left = 17.0
-offset_top = 44.0
-offset_right = 256.0
-offset_bottom = 84.0
-text = "A - A - A - D - W - Space"
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1607356892]
 
-[node name="KneadLevel" type="Label" parent="." unique_id=1212950517]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=279164002]
+offset_right = 1156.0
+offset_bottom = 304.0
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer" unique_id=1050767593]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "A - A - A - D - W - Space"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="KneadLevel" type="Label" parent="CanvasLayer" unique_id=1212950517]
 offset_left = -2.0
 offset_top = -27.0
 offset_right = 88.0
