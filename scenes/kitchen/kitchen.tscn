@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bctyyn0lhjfay"]
+
+[ext_resource type="Texture2D" uid="uid://cbhbmvrvua0on" path="res://assets/kueche.png" id="1_5wy2p"]
+[ext_resource type="PackedScene" uid="uid://ci8y0oh6neahc" path="res://scenes/player/player.tscn" id="2_madu1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
+resource_local_to_scene = true
+size = Vector2(39, 941)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wy2p"]
+resource_local_to_scene = true
+size = Vector2(1009, 62)
+
+[node name="Kitchen" type="Node2D" unique_id=1758529359]
+
+[node name="Kueche" type="Sprite2D" parent="." unique_id=1896883199]
+texture_filter = 1
+position = Vector2(595, 342)
+scale = Vector2(4, 4)
+texture = ExtResource("1_5wy2p")
+
+[node name="Boundaries" type="StaticBody2D" parent="." unique_id=1140330344]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries" unique_id=161169841]
+position = Vector2(100.5, 346.5)
+shape = SubResource("RectangleShape2D_5gxde")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries" unique_id=2015733727]
+position = Vector2(1079, 364)
+shape = SubResource("RectangleShape2D_5gxde")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries" unique_id=937835999]
+position = Vector2(588.5, 830)
+shape = SubResource("RectangleShape2D_5wy2p")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries" unique_id=1854996692]
+position = Vector2(591, -135)
+shape = SubResource("RectangleShape2D_5wy2p")
+
+[node name="Player" parent="." unique_id=2021192100 instance=ExtResource("2_madu1")]
+position = Vector2(589, 347)
+max_speed = 250.0
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1473340324]
+position = Vector2(-589, -347)
+anchor_mode = 0
+position_smoothing_enabled = true
