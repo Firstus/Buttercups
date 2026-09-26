@@ -48,7 +48,6 @@ func _ready() -> void:
 	$Area2D.body_exited.connect(_on_area_2d_body_exited)
 	knead_text.bbcode_enabled = true
 	knead_text.text = ""
-	$Label.visible = false
 
 	_update_level_label()
 	
@@ -71,7 +70,7 @@ func _start_minigame() -> void:
 	_is_active = true
 	_knead_level = 0
 	_update_level_label()
-	$Label.visible = false
+	$InteractionElement.visible = false
 	if player != null:
 		player.freeze()
 	_pick_pattern()
@@ -155,7 +154,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_in_range = true
 		if not _is_active:
-			$Label.visible = true
 			knead_text.text = "Press [b]Space[/b] to knead"
 
 
@@ -163,5 +161,4 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_in_range = false
 		if not _is_active:
-			$Label.visible = false
 			knead_text.text = ""

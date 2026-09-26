@@ -66,7 +66,7 @@ position = Vector2(463, 557)
 player = NodePath("../Player")
 
 [node name="Knead" parent="." unique_id=971235742 node_paths=PackedStringArray("player") instance=ExtResource("5_yi3jr")]
-position = Vector2(674, 456)
+position = Vector2(938, 561)
 player = NodePath("../Player")
 
 [node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("6_hwcho")]
