@@ -12,7 +12,7 @@ func addAmount(item: Item, amount: int) -> void:
 		items[item] = amount
 	updateInventoryUi()
 	
-func removeAmount(item: Item, amount: int) -> void:
+func removeAmount(item: Item, amount: int) -> bool:
 	if(items.has(item)):
 		var value = items.get(item)
 		value = value - amount
@@ -20,7 +20,9 @@ func removeAmount(item: Item, amount: int) -> void:
 			items.erase(item)
 		else:
 			items.set(item, value)
-	updateInventoryUi()
+		updateInventoryUi()
+		return true
+	return false
 
 func updateInventoryUi() -> void:
 	for i in range(slots.size()):
