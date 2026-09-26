@@ -47,5 +47,6 @@ position = Vector2(-589, -347)
 anchor_mode = 0
 position_smoothing_enabled = true
 
-[node name="EggCracking" parent="." unique_id=739322368 instance=ExtResource("3_o4r6q")]
+[node name="EggCracking" parent="." unique_id=739322368 node_paths=PackedStringArray("player") instance=ExtResource("3_o4r6q")]
 position = Vector2(259, 631)
+player = NodePath("../Player")

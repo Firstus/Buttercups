@@ -7,10 +7,15 @@ extends CharacterBody2D
 ## How quickly the player comes to a stop, in pixels per second squared.
 @export var deceleration: float = 900.0
 
+var _frozen: bool = false
+
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("player_left", "player_right", "player_up", "player_down")
 	var target_velocity := direction * max_speed
+	
+	if _frozen:
+		return
 
 	if direction.is_zero_approx():
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
@@ -18,3 +23,10 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(target_velocity, acceleration * delta)
 
 	move_and_slide()
+	
+func freeze():
+	_frozen = true
+	velocity = Vector2.ZERO
+	
+func unfreeze():
+	_frozen = false
