@@ -31,11 +31,17 @@ var _character_patterns = [
 
 var knead_text: Node
 var knead_level: Node
+var knead_box: Node
+
+var _shake_tween: Tween
+var _box_rest_position: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	knead_level = $CanvasLayer/KneadLevel
 	knead_text = $CanvasLayer/VBoxContainer/RichTextLabel
+	knead_box = $CanvasLayer/VBoxContainer
+	_box_rest_position = knead_box.position
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
 	$Area2D.body_entered.connect(_on_area_2d_body_entered)
@@ -87,6 +93,7 @@ func _handle_key(keycode: int) -> void:
 	if _TOKEN_KEYS[_current_pattern[_input_index]] != keycode:
 		_input_index = 0
 		_update_pattern_label()
+		_shake_pattern()
 		return
 
 	_input_index += 1
@@ -124,6 +131,20 @@ func _update_pattern_label() -> void:
 		else:
 			parts.append("[color=#9e9e9e]%s[/color]" % token)
 	knead_text.text = " - ".join(parts)
+
+
+# Shakes the pattern display when a wrong key is pressed.
+func _shake_pattern() -> void:
+	if _shake_tween and _shake_tween.is_valid():
+		_shake_tween.kill()
+		knead_box.position = _box_rest_position
+
+	var strength := 12.0
+	_shake_tween = create_tween()
+	for _i in 3:
+		_shake_tween.tween_property(knead_box, "position", _box_rest_position + Vector2(strength, 0), 0.04)
+		_shake_tween.tween_property(knead_box, "position", _box_rest_position - Vector2(strength, 0), 0.04)
+	_shake_tween.tween_property(knead_box, "position", _box_rest_position, 0.05)
 
 
 func _update_level_label() -> void:

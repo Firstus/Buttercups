@@ -12,6 +12,8 @@ var _label_tween: Tween
 
 var _player_in_range = false
 
+signal eggs_cracked
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$MiniGame.visible = false
@@ -47,6 +49,7 @@ func _egg_cracked(amount: int):
 		$MiniGame.started = false
 		$MiniGame.visible = false
 		$Label.visible = false
+		eggs_cracked.emit()
 		if player != null:
 			player.unfreeze()
 

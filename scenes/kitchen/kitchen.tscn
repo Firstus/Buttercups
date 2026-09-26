@@ -65,5 +65,6 @@ position_smoothing_enabled = true
 position = Vector2(19, 583)
 player = NodePath("../Player")
 
-[node name="Knead" parent="." unique_id=971235742 instance=ExtResource("5_yi3jr")]
+[node name="Knead" parent="." unique_id=971235742 node_paths=PackedStringArray("player") instance=ExtResource("5_yi3jr")]
 position = Vector2(674, 456)
+player = NodePath("../Player")
