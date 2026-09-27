@@ -23,6 +23,19 @@ func hasRecipeIngredients(recipe: Recipe) -> bool:
 			return false
 	return true
 
+func hasCookieInInventory(itemList: Array[Item]) -> bool:
+	for i in range(itemList.size()):
+		if(items.has(itemList[i])):
+			return true
+	return false
+
+func SellAllCookies(itemList: Array[Item]) -> void:
+	for i in range(itemList.size()):
+		if(items.has(itemList[i])):
+			var currentItem = itemList[i]
+			var amount = items[currentItem]
+			changeMoney(currentItem.cost * amount)
+			removeAmount(currentItem, amount)
 
 func RemoveByRecipe(recipe: Recipe) -> bool:
 	if(!hasRecipeIngredients(recipe)):
