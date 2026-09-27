@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://k8xfschq8lnj" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://dpo8jseynvw7o" path="res://assets/Character/walkingcycle.png" id="2_dovo2"]
+[ext_resource type="AudioStream" uid="uid://cqfsgej2gq1t2" path="res://scenes/player/jonasblakewood-atmospheric-soft-546967.mp3" id="3_gmlin"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gmlin"]
 atlas = ExtResource("2_dovo2")
@@ -80,3 +81,8 @@ sprite_frames = SubResource("SpriteFrames_5gxde")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2135729005]
 position = Vector2(0, 23)
 shape = SubResource("RectangleShape2D_5gxde")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1892755746]
+stream = ExtResource("3_gmlin")
+volume_db = -15.0
+autoplay = true

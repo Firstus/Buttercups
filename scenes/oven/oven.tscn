@@ -6,6 +6,8 @@
 [ext_resource type="Resource" uid="uid://oqbimoc1pe5o" path="res://assets/Recipes/Butterkeks.tres" id="3_butterkeks"]
 [ext_resource type="Resource" uid="uid://2f3uehc6w7u4" path="res://assets/Recipes/Weißekeks.tres" id="4_weissekeks"]
 [ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="5_ind"]
+[ext_resource type="AudioStream" uid="uid://boy5jai2ipy84" path="res://scenes/oven/freesound_community-cookies-are-ready-95956.mp3" id="6_4pemp"]
+[ext_resource type="AudioStream" uid="uid://cqqve34jhluvn" path="res://scenes/oven/freesound_community-oven-01-29740.mp3" id="7_13max"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(128, 256)
@@ -29,3 +31,11 @@ one_shot = true
 
 [node name="ClockSpawn" type="Marker2D" parent="." unique_id=1032954318]
 position = Vector2(0, -100)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=652887121]
+stream = ExtResource("6_4pemp")
+volume_db = 11.149
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=116885259]
+stream = ExtResource("7_13max")
+volume_db = 24.0
