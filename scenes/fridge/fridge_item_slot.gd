@@ -15,11 +15,13 @@ func setup(item: Item, amount: int) -> void:
 	tooltip_text = "%s x%d" % [item.name, amount]
 	
 func onClick() -> void:
-	if (buttonAmount > 0):
-		buttonAmount = buttonAmount - 1
-		$Count.text = str(buttonAmount)
-		tooltip_text = "%s x%d" % [buttonItem.name, buttonAmount]
-		FridgeSingleton.removeAmount(buttonItem, 1)
+	if buttonAmount <= 0:
+		return
+	if not FridgeSingleton.removeAmount(buttonItem, 1):
+		return
+	buttonAmount -= 1
+	$Count.text = str(buttonAmount)
+	tooltip_text = "%s x%d" % [buttonItem.name, buttonAmount]
 
 
 func _on_button_up() -> void:

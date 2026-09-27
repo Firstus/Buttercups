@@ -4,16 +4,19 @@
 [ext_resource type="Script" uid="uid://df8yqcoemgltr" path="res://scenes/oven/oven.gd" id="1_fubu7"]
 [ext_resource type="Script" uid="uid://bd5httcmxuhxm" path="res://scripts/Recipe.gd" id="2_recipe"]
 [ext_resource type="Resource" uid="uid://oqbimoc1pe5o" path="res://assets/Recipes/Butterkeks.tres" id="3_butterkeks"]
-[ext_resource type="Resource" uid="uid://2f3uehc6w7u4" path="res://assets/Recipes/Blaubeerkeks.tres" id="4_blaubeerkeks"]
+[ext_resource type="Resource" uid="uid://2f3uehc6w7u4" path="res://assets/Recipes/Weißekeks.tres" id="4_weissekeks"]
+[ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="5_ind"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(128, 256)
 
 [node name="Oven" type="Node2D" unique_id=1551289359]
 script = ExtResource("1_fubu7")
-recipes = Array[ExtResource("2_recipe")]([ExtResource("3_butterkeks"), ExtResource("4_blaubeerkeks")])
+recipes = Array[ExtResource("2_recipe")]([ExtResource("3_butterkeks"), ExtResource("4_weissekeks")])
 
 [node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("1_fak8e")]
+
+[node name="Indicator" parent="." instance=ExtResource("5_ind")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1802117655]
 
@@ -26,13 +29,3 @@ one_shot = true
 
 [node name="ClockSpawn" type="Marker2D" parent="." unique_id=1032954318]
 position = Vector2(0, -100)
-
-[node name="Label" type="Label" parent="." unique_id=1842055691]
-visible = false
-offset_left = -70.0
-offset_top = 240.0
-offset_right = 70.0
-offset_bottom = 268.0
-theme_override_constants/outline_size = 8
-text = "Use oven"
-horizontal_alignment = 1

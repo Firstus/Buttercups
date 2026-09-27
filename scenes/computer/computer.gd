@@ -8,13 +8,13 @@ const ITEM_DIR := "res://assets/Items"
 @export var player: Node
 
 @onready var _menu: ShopMenu = $Menu
+@onready var _indicator: CanvasLayer = $Indicator
 
 var _items: Array[Item] = []
 var _player_in_range := false
 
 
 func _ready() -> void:
-	$Label.visible = false
 	$Area2D.body_entered.connect(_on_body_entered)
 	$Area2D.body_exited.connect(_on_body_exited)
 	_menu.close_requested.connect(_close_menu)
@@ -22,9 +22,11 @@ func _ready() -> void:
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
 	_load_items()
-	# The player can already be standing in the area when this scene loads.
-	if _is_player_inside():
-		_show_prompt(true)
+
+
+# The press-space prompt shows while the shop can actually be opened.
+func _process(_delta: float) -> void:
+	_indicator.visible = _player_in_range and not _menu.is_open()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -37,14 +39,12 @@ func _open_menu() -> void:
 	if _menu.is_open():
 		return
 	_menu.open(_items, InventorySingleton.money)
-	$Label.visible = false
 	if player != null:
 		player.freeze()
 
 
 func _close_menu() -> void:
 	_menu.close()
-	$Label.visible = _player_in_range
 	if player != null:
 		player.unfreeze()
 
@@ -82,8 +82,6 @@ func _sort_items_by_name(a: Item, b: Item) -> bool:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_in_range = true
-		if not _menu.is_open():
-			_show_prompt(true)
 
 
 func _on_body_exited(body: Node2D) -> void:
@@ -91,16 +89,3 @@ func _on_body_exited(body: Node2D) -> void:
 		_player_in_range = false
 		if _menu.is_open():
 			_close_menu()
-		else:
-			_show_prompt(false)
-
-
-func _is_player_inside() -> bool:
-	for body in $Area2D.get_overlapping_bodies():
-		if body.is_in_group("player"):
-			return true
-	return false
-
-
-func _show_prompt(is_visible: bool) -> void:
-	$Label.visible = is_visible

@@ -9,12 +9,11 @@ content_margin_right = 16.0
 content_margin_bottom = 8.0
 bg_color = Color(0, 0, 0, 0.3)
 
-[node name="TextualIndicator" type="Node2D" unique_id=672205827]
+[node name="TextualIndicator" type="CanvasLayer" unique_id=672205827]
+visible = false
 script = ExtResource("1_3f0hr")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1443470686]
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -26,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_background")
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer" unique_id=814705131]
+[node name="Label" type="Label" parent="PanelContainer" unique_id=814705131]
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 32
 text = "Drücke Leertaste"

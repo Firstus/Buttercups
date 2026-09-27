@@ -53,6 +53,8 @@ var _shake_tween: Tween
 var _dough_fade_tween: Tween
 var _box_rest_position: Vector2
 
+@onready var _indicator: CanvasLayer = $Indicator
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	knead_level = $CanvasLayer/KneadLevel
@@ -77,6 +79,8 @@ func _process(delta: float) -> void:
 	_update_restart_lock(delta)
 	if not _is_active:
 		$InteractionElement.visible = _can_knead()
+	# The press-space prompt shows while a round can actually be started.
+	_indicator.visible = not _is_active and _player_in_range and _can_knead()
 
 
 # Keeps the restart lock alive while the action is still held/tapped.
@@ -219,12 +223,8 @@ func _update_level_label() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_in_range = true
-		if not _is_active and _can_knead():
-			knead_text.text = "Press [b]Space[/b] to knead"
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_in_range = false
-		if not _is_active:
-			knead_text.text = ""

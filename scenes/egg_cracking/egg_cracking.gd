@@ -47,8 +47,9 @@ var _egg_sprites: Array[Sprite2D] = []
 var _egg_whole_textures: Array[Texture2D] = []
 var _egg_base_scales: Array[Vector2] = []
 
-var _label_tween: Tween
 var _egg_fade_tween: Tween
+
+@onready var _indicator: CanvasLayer = $Indicator
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -87,8 +88,11 @@ func _process(delta: float) -> void:
 		if _cooldown <= 0.0:
 			_enter_ready_or_idle()
 
-	# The glow only marks the station when an egg can actually be cracked.
-	$InteractionElement.visible = _state != State.PLAYING and _can_crack()
+	# The glow and the press-space prompt only mark the station while an egg
+	# can actually be cracked and no round is running.
+	var can_crack: bool = _state != State.PLAYING and _can_crack()
+	$InteractionElement.visible = can_crack
+	_indicator.visible = can_crack and _player_in_range
 
 
 # A station freed mid-round must not leave the player frozen behind.
@@ -125,7 +129,6 @@ func _end_round() -> void:
 	_cooldown = RESTART_DELAY
 	$MiniGame.stop()
 	$MiniGame.visible = false
-	$Label.visible = false
 	_fade_eggs_out()
 	_set_player_frozen(false)
 	if _round_recipe != null:
@@ -157,9 +160,6 @@ func _set_player_frozen(is_frozen: bool) -> void:
 
 
 func _egg_cracked(amount: int) -> void:
-	$Label.text = "Eggs cracked: " + str(amount)
-	$Label.visible = true
-	_pop_label()
 	_crack_egg(amount - 1)
 
 
@@ -218,19 +218,3 @@ func _hide_eggs() -> void:
 	# A new round may have started in the meantime; its eggs must stay visible.
 	if _state != State.PLAYING:
 		$Eggs.visible = false
-
-
-# Quick scale pop so it's obvious the counter updated.
-func _pop_label() -> void:
-	if _label_tween and _label_tween.is_valid():
-		_label_tween.kill()
-
-	var label: Label = $Label
-	label.pivot_offset = label.size * 0.5
-	label.scale = Vector2.ONE
-
-	_label_tween = label.create_tween()
-	_label_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	_label_tween.tween_property(label, "scale", Vector2(1.3, 1.3), 0.12)
-	_label_tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	_label_tween.tween_property(label, "scale", Vector2.ONE, 0.25)

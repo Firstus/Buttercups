@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://bcgalkx4ax4jt" path="res://assets/Items/Schokolade.tres" id="7_8xmrj"]
 [ext_resource type="Resource" uid="uid://cd33if7dc2mja" path="res://assets/Items/WeißeSchokolade.tres" id="8_lmu87"]
 [ext_resource type="Resource" uid="uid://b0oks7xindcf3" path="res://assets/Items/Zucker.tres" id="9_f361i"]
+[ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="10_ind"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(122, 255)
@@ -29,14 +30,6 @@ shape = SubResource("RectangleShape2D_5gxde")
 position = Vector2(2, 0)
 texture = ExtResource("2_srgvo")
 
-[node name="Label" type="Label" parent="." unique_id=307536391]
-visible = false
-offset_left = -65.0
-offset_top = -80.0
-offset_right = 65.0
-offset_bottom = -57.0
-theme_override_constants/outline_size = 8
-text = "Use computer"
-horizontal_alignment = 1
+[node name="Indicator" parent="." instance=ExtResource("10_ind")]
 
 [node name="Menu" parent="." unique_id=983638154 instance=ExtResource("2_menu")]

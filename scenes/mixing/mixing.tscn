@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://b688783jfuns7" path="res://assets/Recipes/gemischtes_Mehl.tres" id="2_381f4"]
 [ext_resource type="Script" uid="uid://co5mmdtxtkjt" path="res://scenes/mixing/mixing_minigame.gd" id="2_jlcg3"]
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="3_bsi72"]
+[ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="4_ind"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0eb53"]
 size = Vector2(128, 256)
@@ -14,6 +15,8 @@ recipe = ExtResource("2_381f4")
 
 [node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("3_bsi72")]
 position = Vector2(0, -80)
+
+[node name="Indicator" parent="." instance=ExtResource("4_ind")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=572155404]
 
