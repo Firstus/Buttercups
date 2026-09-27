@@ -7,5 +7,5 @@
 script = ExtResource("1_c50df")
 name = "Schoko Keks"
 icon = ExtResource("1_hjmxp")
-cost = 8
+cost = 100
 metadata/_custom_type_script = "uid://bwjjrhk07p45h"

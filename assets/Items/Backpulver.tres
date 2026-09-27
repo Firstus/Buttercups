@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://6erlwlg055e4"]
 
+[ext_resource type="Texture2D" uid="uid://ct2auru2o5nli" path="res://assets/Grafiken/Backpulver.png" id="1_8ledx"]
 [ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="1_jyai4"]
 
 [resource]
 script = ExtResource("1_jyai4")
 name = "Backpulver"
+icon = ExtResource("1_8ledx")
 cost = 3
 metadata/_custom_type_script = "uid://bwjjrhk07p45h"
