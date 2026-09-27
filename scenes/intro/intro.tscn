@@ -4,6 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://dijwb5od6dicf" path="res://assets/fabrik.png" id="2_iatiw"]
 [ext_resource type="Shader" uid="uid://dqrqwqvoxpm77" path="res://scenes/intro/background_blur.gdshader" id="3_blur"]
 [ext_resource type="Texture2D" uid="uid://lci7u80mep4w" path="res://assets/farbrik_zerstoert.png" id="4_zerst"]
+[ext_resource type="AudioStream" uid="uid://fpyrs4w1yeli" path="res://assets/HalloweenCookie/HalloweenCookie.wav" id="5_hc0"]
+[ext_resource type="AudioStream" uid="uid://cy4gljljkd7uw" path="res://assets/HalloweenCookie/HalloweenCookie_1.wav" id="6_hc1"]
+[ext_resource type="AudioStream" uid="uid://d0bdkhyqapw71" path="res://assets/HalloweenCookie/HalloweenCookie_2.wav" id="7_hc2"]
+[ext_resource type="AudioStream" uid="uid://i0ov7bygj6er" path="res://assets/HalloweenCookie/HalloweenCookie_3.wav" id="8_hc3"]
+[ext_resource type="AudioStream" uid="uid://cbxjlixyjjst8" path="res://assets/HalloweenCookie/HalloweenCookie_4.wav" id="9_hc4"]
+[ext_resource type="AudioStream" uid="uid://b7nshdaw4igk" path="res://assets/HalloweenCookie/HalloweenCookie_5.wav" id="10_hc5"]
+[ext_resource type="AudioStream" uid="uid://udhjsx2ccy0f" path="res://assets/HalloweenCookie/HalloweenCookie_6.wav" id="11_hc6"]
+[ext_resource type="AudioStream" uid="uid://bk3nt11avf8u4" path="res://assets/HalloweenCookie/HalloweenCookie_7.wav" id="12_hc7"]
+[ext_resource type="Texture2D" uid="uid://dpo8jseynvw7o" path="res://assets/Character/walkingcycle.png" id="13_2ypwg"]
+[ext_resource type="Texture2D" uid="uid://dhx0ueros7f6s" path="res://assets/Grafiken/CharakterBöse.png" id="14_14p5w"]
+[ext_resource type="Texture2D" uid="uid://c4jl36oeb1obk" path="res://assets/soft_particle.png" id="16_soft"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_intact"]
 shader = ExtResource("3_blur")
@@ -15,8 +26,70 @@ shader = ExtResource("3_blur")
 shader_parameter/blur_amount = 0.0
 shader_parameter/max_mip_level = 5.0
 
+[sub_resource type="Gradient" id="Gradient_fire"]
+offsets = PackedFloat32Array(0, 0.4, 1)
+colors = PackedColorArray(1, 0.85, 0.3, 1, 1, 0.4, 0.05, 0.9, 0.5, 0.1, 0.05, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fire"]
+gradient = SubResource("Gradient_fire")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fire"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(480, 170, 1)
+direction = Vector3(0, -1, 0)
+spread = 18.0
+initial_velocity_min = 60.0
+initial_velocity_max = 140.0
+gravity = Vector3(0, -40, 0)
+scale_min = 0.4
+scale_max = 0.9
+color_ramp = SubResource("GradientTexture1D_fire")
+
+[sub_resource type="Gradient" id="Gradient_smoke"]
+offsets = PackedFloat32Array(0, 0.4, 1)
+colors = PackedColorArray(0.5, 0.5, 0.5, 0, 0.35, 0.35, 0.35, 0.5, 0.15, 0.15, 0.15, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_smoke"]
+gradient = SubResource("Gradient_smoke")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_smoke"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(520, 160, 1)
+direction = Vector3(0, -1, 0)
+spread = 30.0
+initial_velocity_min = 25.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, -25, 0)
+scale_max = 2.2
+color_ramp = SubResource("GradientTexture1D_smoke")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyqjm"]
+atlas = ExtResource("13_2ypwg")
+region = Rect2(0, 0, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbxqg"]
+atlas = ExtResource("14_14p5w")
+region = Rect2(0, 0, 100, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5gxde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyqjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbxqg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Intro" type="Node2D" unique_id=352291498]
 script = ExtResource("1_qeukb")
+voice_lines = Array[AudioStream]([ExtResource("5_hc0"), ExtResource("6_hc1"), ExtResource("7_hc2"), ExtResource("8_hc3"), ExtResource("9_hc4"), ExtResource("10_hc5"), ExtResource("11_hc6"), ExtResource("12_hc7")])
 
 [node name="FactoryIntact" type="Sprite2D" parent="." unique_id=740194510]
 texture_filter = 4
@@ -33,6 +106,24 @@ position = Vector2(581, 332)
 scale = Vector2(0.61296296, 0.61296296)
 texture = ExtResource("4_zerst")
 
+[node name="Fire" type="GPUParticles2D" parent="FactoryDestroyed" unique_id=1513575074]
+material = SubResource("ShaderMaterial_destroyed")
+position = Vector2(3.2628398, 1.6314545)
+amount = 200
+texture = ExtResource("16_soft")
+lifetime = 1.6
+visibility_rect = Rect2(-700, -500, 1400, 1000)
+process_material = SubResource("ParticleProcessMaterial_fire")
+
+[node name="Smoke" type="GPUParticles2D" parent="FactoryDestroyed" unique_id=1600297834]
+material = SubResource("ShaderMaterial_destroyed")
+position = Vector2(0, -78.30817)
+amount = 100
+texture = ExtResource("16_soft")
+lifetime = 3.0
+visibility_rect = Rect2(-700, -500, 1400, 1000)
+process_material = SubResource("ParticleProcessMaterial_smoke")
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=616192018]
 propagate_maximum_size = true
 clip_contents = true
@@ -47,7 +138,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="." unique_id=1083109807]
+[node name="UI" type="CanvasLayer" parent="." unique_id=721576175]
+
+[node name="Label" type="Label" parent="UI" unique_id=1083109807]
 offset_left = 267.0
 offset_top = 63.0
 offset_right = 885.0
@@ -57,7 +150,7 @@ theme_override_font_sizes/font_size = 32
 text = "Hier könnte ein Text stehen"
 autowrap_mode = 3
 
-[node name="StartLabel" type="Label" parent="." unique_id=1837562941]
+[node name="StartLabel" type="Label" parent="UI" unique_id=1837562941]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -71,3 +164,12 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "Drücke Leertaste zum Starten"
 horizontal_alignment = 1
+
+[node name="Voice" type="AudioStreamPlayer" parent="." unique_id=644906361]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1027849052]
+visible = false
+position = Vector2(450, 504)
+sprite_frames = SubResource("SpriteFrames_5gxde")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1051545400]
