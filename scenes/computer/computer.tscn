@@ -2,13 +2,22 @@
 
 [ext_resource type="Texture2D" uid="uid://d8l01aprxkhu" path="res://icon.svg" id="1_difci"]
 [ext_resource type="Script" uid="uid://dnhowiwcj7ojs" path="res://scenes/computer/computer.gd" id="1_qt3pe"]
+[ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="2_djvcs"]
 [ext_resource type="PackedScene" path="res://scenes/computer/shop_menu.tscn" id="2_menu"]
+[ext_resource type="Resource" uid="uid://6erlwlg055e4" path="res://assets/Items/Backpulver.tres" id="3_n4ont"]
+[ext_resource type="Resource" uid="uid://c7ivbof3nosjf" path="res://assets/Items/Butter.tres" id="4_gh4r0"]
+[ext_resource type="Resource" uid="uid://bl2mmd3xbslgg" path="res://assets/Items/Ei.tres" id="5_8it8f"]
+[ext_resource type="Resource" uid="uid://ch7bhreedw4mk" path="res://assets/Items/Mehl.tres" id="6_jrk3l"]
+[ext_resource type="Resource" uid="uid://bcgalkx4ax4jt" path="res://assets/Items/Schokolade.tres" id="7_8xmrj"]
+[ext_resource type="Resource" uid="uid://cd33if7dc2mja" path="res://assets/Items/WeißeSchokolade.tres" id="8_lmu87"]
+[ext_resource type="Resource" uid="uid://b0oks7xindcf3" path="res://assets/Items/Zucker.tres" id="9_f361i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(122, 255)
 
 [node name="Computer" type="Node2D" unique_id=64554018]
 script = ExtResource("1_qt3pe")
+on_sale = Array[ExtResource("2_djvcs")]([ExtResource("3_n4ont"), ExtResource("4_gh4r0"), ExtResource("5_8it8f"), ExtResource("6_jrk3l"), ExtResource("7_8xmrj"), ExtResource("8_lmu87"), ExtResource("9_f361i")])
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1761406515]
 
@@ -20,7 +29,7 @@ shape = SubResource("RectangleShape2D_5gxde")
 position = Vector2(2, 0)
 texture = ExtResource("1_difci")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1459265824]
 visible = false
 offset_left = -65.0
 offset_top = -80.0
@@ -30,4 +39,4 @@ theme_override_constants/outline_size = 8
 text = "Use computer"
 horizontal_alignment = 1
 
-[node name="Menu" parent="." instance=ExtResource("2_menu")]
+[node name="Menu" parent="." unique_id=855301559 instance=ExtResource("2_menu")]
