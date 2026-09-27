@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://b688783jfuns7" path="res://assets/Recipes/gemischtes_Mehl.tres" id="2_381f4"]
 [ext_resource type="Script" uid="uid://co5mmdtxtkjt" path="res://scenes/mixing/mixing_minigame.gd" id="2_jlcg3"]
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="3_bsi72"]
-[ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="4_ind"]
 [ext_resource type="Texture2D" uid="uid://c4pa8a7g2mhd2" path="res://assets/Grafiken/Waage.png" id="4_bc8x0"]
+[ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="4_ind"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0eb53"]
 size = Vector2(128, 256)
@@ -17,7 +17,7 @@ recipe = ExtResource("2_381f4")
 [node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("3_bsi72")]
 position = Vector2(0, -80)
 
-[node name="Indicator" parent="." instance=ExtResource("4_ind")]
+[node name="Indicator" parent="." unique_id=626714683 instance=ExtResource("4_ind")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=572155404]
 position = Vector2(0.49999967, -82.50001)
@@ -62,8 +62,6 @@ text = "Tap or hold Space
 to fill"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=335060908]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

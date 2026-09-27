@@ -63,7 +63,7 @@ position = Vector2(697.25, 615.5)
 shape = SubResource("RectangleShape2D_4qyfo")
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Boundaries" unique_id=2070972529]
-position = Vector2(1265, 553.5)
+position = Vector2(-5, 120)
 shape = SubResource("RectangleShape2D_0s81k")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="Boundaries" unique_id=1735377380]
@@ -73,16 +73,6 @@ shape = SubResource("RectangleShape2D_s6lap")
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="Boundaries" unique_id=1257207748]
 position = Vector2(1241, 655)
 shape = SubResource("RectangleShape2D_s6lap")
-
-[node name="Player" parent="." unique_id=2021192100 instance=ExtResource("2_madu1")]
-position = Vector2(589, 347)
-max_speed = 250.0
-acceleration = 1200.0
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1473340324]
-position = Vector2(-589, -347)
-anchor_mode = 0
-position_smoothing_enabled = true
 
 [node name="EggCracking" parent="." unique_id=739322368 node_paths=PackedStringArray("player") instance=ExtResource("3_o4r6q")]
 position = Vector2(448, 552)
@@ -140,3 +130,13 @@ texture = ExtResource("12_rryun")
 position = Vector2(1215, 675)
 scale = Vector2(0.4597108, 0.4597108)
 texture = ExtResource("12_rryun")
+
+[node name="Player" parent="." unique_id=2021192100 instance=ExtResource("2_madu1")]
+position = Vector2(589, 347)
+max_speed = 250.0
+acceleration = 1200.0
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1473340324]
+position = Vector2(-589, -347)
+anchor_mode = 0
+position_smoothing_enabled = true

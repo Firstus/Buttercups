@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="2_y8sme"]
 [ext_resource type="Texture2D" uid="uid://cp4tetr3oyx8q" path="res://assets/egg_crack_gauge_proper.png" id="3_me04q"]
 [ext_resource type="Script" uid="uid://bq7q2nk0gmkha" path="res://scenes/egg_cracking/mini_game.gd" id="3_y8sme"]
-[ext_resource type="Texture2D" uid="uid://ba4hp3k4k7evr" path="res://assets/A4E277EC-FAD9-461D-BBEB-3AE324796FE4.png" id="5_lsm5j"]
 [ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="4_ind"]
+[ext_resource type="Texture2D" uid="uid://ba4hp3k4k7evr" path="res://assets/A4E277EC-FAD9-461D-BBEB-3AE324796FE4.png" id="5_lsm5j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(128, 256)
@@ -15,7 +15,7 @@ script = ExtResource("1_1rfmu")
 
 [node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("2_y8sme")]
 
-[node name="Indicator" parent="." instance=ExtResource("4_ind")]
+[node name="Indicator" parent="." unique_id=1993101130 instance=ExtResource("4_ind")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=745983442]
 
@@ -26,9 +26,9 @@ shape = SubResource("RectangleShape2D_5gxde")
 [node name="MiniGame" type="Node2D" parent="." unique_id=1305825780]
 script = ExtResource("3_y8sme")
 
-[node name="GaugeCanvas" type="CanvasLayer" parent="MiniGame"]
+[node name="GaugeCanvas" type="CanvasLayer" parent="MiniGame" unique_id=1931907717]
 
-[node name="GaugeRoot" type="Node2D" parent="MiniGame/GaugeCanvas"]
+[node name="GaugeRoot" type="Node2D" parent="MiniGame/GaugeCanvas" unique_id=212274027]
 
 [node name="Gauge" type="Sprite2D" parent="MiniGame/GaugeCanvas/GaugeRoot" unique_id=1593648044]
 texture_filter = 1
@@ -48,8 +48,6 @@ position = Vector2(0, -10)
 
 [node name="ZoneBottom" type="Marker2D" parent="MiniGame/GaugeCanvas/GaugeRoot" unique_id=2125644364]
 position = Vector2(0, 10)
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=139577869]
 
 [node name="Eggs" type="Node2D" parent="." unique_id=160143600]
 
