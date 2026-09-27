@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dqqayq2lllvdr" path="res://assets/949CFD1C-1C6B-4B0F-9053-163800B87464.png" id="1_bxri6"]
 [ext_resource type="Script" uid="uid://brbs7hha07mly" path="res://scenes/fridge/fridge.gd" id="1_hqalg"]
 [ext_resource type="PackedScene" path="res://scenes/fridge/fridge_menu.tscn" id="2_menu"]
+[ext_resource type="AudioStream" uid="uid://dbygx6q616p6o" path="res://scenes/fridge/freesound_community-kitchen-refrigerator-working-32215.mp3" id="4_xi8s0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxri6"]
 size = Vector2(129, 185)
@@ -29,3 +30,7 @@ text = "Open fridge"
 horizontal_alignment = 1
 
 [node name="Menu" parent="." unique_id=15435149 instance=ExtResource("2_menu")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=235837612]
+stream = ExtResource("4_xi8s0")
+autoplay = true

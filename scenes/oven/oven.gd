@@ -78,6 +78,7 @@ func _start_baking(recipe: Recipe) -> void:
 	add_child(_clock)
 	_timer.start(_duration)
 	baking_started.emit()
+	$AudioStreamPlayer2D2.play(3)
 
 
 func _on_timer_timeout() -> void:
@@ -89,6 +90,7 @@ func _on_timer_timeout() -> void:
 		InventorySingleton.addAmount(_baking_recipe.result, 1)
 		_baking_recipe = null
 	baking_finished.emit()
+	$AudioStreamPlayer2D.play(6.2)
 
 
 ## The oven does not freeze the player, so the clock is the only "oven is on" indicator.
