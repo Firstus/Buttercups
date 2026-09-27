@@ -17,10 +17,16 @@ func addAmount(item: Item, amount: int) -> void:
 	OnInventoryChanged.emit()
 	
 
-func RemoveByRecipe(recipe: Recipe) -> bool:
-	for i in range(recipe.incredients.size()):
-		if(!items.has(recipe.incredients[i])):
+func hasRecipeIngredients(recipe: Recipe) -> bool:
+	for ingredient in recipe.incredients:
+		if items.get(ingredient, 0) <= 0:
 			return false
+	return true
+
+
+func RemoveByRecipe(recipe: Recipe) -> bool:
+	if(!hasRecipeIngredients(recipe)):
+		return false
 	for i in range(recipe.incredients.size()):
 		removeAmount(recipe.incredients[i], 1)
 	return true

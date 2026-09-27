@@ -2,7 +2,7 @@ extends Area2D
 
 const RECIPE_DIR := "res://assets/Recipes"
 # TODO: Replace with real unlock progress once crafting/progression exists.
-const ENABLED_RECIPE_PATHS := ["res://assets/Recipes/Butterkeks.tres", "res://assets/Recipes/gemischtes_Mehl.tres", "res://assets/Recipes/geschlagenes_Ei.tres"]
+const ENABLED_RECIPE_PATHS := ["res://assets/Recipes/Butterkeks.tres", "res://assets/Recipes/gemischtes_Mehl.tres", "res://assets/Recipes/geschlagenes_Ei.tres", "res://assets/Recipes/Schokokeks.tres", "res://assets/Recipes/Weißekeks.tres", "res://assets/Recipes/teig.tres"]
 
 @export var player: Node
 

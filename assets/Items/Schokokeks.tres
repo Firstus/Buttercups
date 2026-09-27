@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://bjce4nuvghvhj"]
 
 [ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="1_c50df"]
+[ext_resource type="Texture2D" uid="uid://cqeyieog6iq7g" path="res://assets/Grafiken/ButterkeksSchoko.png" id="1_hjmxp"]
 
 [resource]
 script = ExtResource("1_c50df")
-name = "Blaubeerkeks"
+name = "Schoko Keks"
+icon = ExtResource("1_hjmxp")
 cost = 8
 metadata/_custom_type_script = "uid://bwjjrhk07p45h"

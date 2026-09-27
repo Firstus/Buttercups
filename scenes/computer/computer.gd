@@ -52,6 +52,7 @@ func _close_menu() -> void:
 # TODO: Put the bought items into the inventory/fridge once storage is wired up.
 func _on_item_purchased(_item: Item, _amount: int, total: int) -> void:
 	InventorySingleton.changeMoney(-total)
+	FridgeSingleton.addAmount(_item, _amount)
 	_menu.set_money(InventorySingleton.money)
 
 

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="3_bsi72"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0eb53"]
-size = Vector2(140, 265)
+size = Vector2(128, 256)
 
 [node name="Mixing" type="Node2D" unique_id=1541803609]
 script = ExtResource("1_xarer")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bweaxgru14ih7"]
+
+[ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="1_7r1of"]
+[ext_resource type="Texture2D" uid="uid://dwxtyny5civ8c" path="res://assets/Grafiken/ButterkeksWeiß.png" id="1_hxrec"]
+
+[resource]
+script = ExtResource("1_7r1of")
+name = "Weißer Keks"
+icon = ExtResource("1_hxrec")
+metadata/_custom_type_script = "uid://bwjjrhk07p45h"

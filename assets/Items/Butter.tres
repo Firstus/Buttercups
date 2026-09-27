@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://c7ivbof3nosjf"]
 
 [ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="1_3qqbb"]
+[ext_resource type="Texture2D" uid="uid://cc7ohj152usw6" path="res://assets/Grafiken/Butter.png" id="1_jgk6n"]
 
 [resource]
 script = ExtResource("1_3qqbb")
 name = "Butter"
+icon = ExtResource("1_jgk6n")
 cost = 4
 metadata/_custom_type_script = "uid://bwjjrhk07p45h"

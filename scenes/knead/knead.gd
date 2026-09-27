@@ -8,6 +8,12 @@ var player: Node
 @export
 var goal_level: int = 5
 
+## Recipe kneaded here. A round costs its ingredients and yields its result.
+@export var recipe: Recipe
+
+## Seconds the action must stay released after a round before another can start.
+const RESTART_DELAY := 0.5
+
 const _TOKEN_KEYS := {
 	"A": KEY_A,
 	"D": KEY_D,
@@ -21,6 +27,10 @@ var _input_index: int = 0
 var _is_active: bool = false
 var _player_in_range: bool = false
 var _current_pattern: Array = []
+
+## Counts down while no input arrives after a round. Leftover presses keep it
+## alive, so they cannot chain rounds and re-freeze the player.
+var _restart_lock := 0.0
 
 var _character_patterns = [
 	["A", "D", "A", "D"],
@@ -41,6 +51,7 @@ func _ready() -> void:
 	knead_level = $CanvasLayer/KneadLevel
 	knead_text = $CanvasLayer/VBoxContainer/RichTextLabel
 	knead_box = $CanvasLayer/VBoxContainer
+	$KneadingSprite.visible = false
 	_box_rest_position = knead_box.position
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
@@ -54,20 +65,44 @@ func _ready() -> void:
 	#_start_minigame()
 
 
+# The glow only marks the station while the dough can actually be kneaded.
+func _process(delta: float) -> void:
+	_update_restart_lock(delta)
+	if not _is_active:
+		$InteractionElement.visible = _can_knead()
+
+
+# Keeps the restart lock alive while the action is still held/tapped.
+func _update_restart_lock(delta: float) -> void:
+	if _restart_lock <= 0.0:
+		return
+	if Input.is_action_pressed("action_command"):
+		_restart_lock = RESTART_DELAY
+	else:
+		_restart_lock -= delta
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventKey) or not event.pressed or event.echo:
 		return
 
 	if not _is_active:
-		if _player_in_range and event.is_action_pressed("action_command"):
+		if _player_in_range and event.is_action_pressed("action_command") and _can_knead() and _restart_lock <= 0.0:
 			_start_minigame()
 		return
 
 	_handle_key(event.physical_keycode)
 
 
+func _can_knead() -> bool:
+	return recipe != null and InventorySingleton.hasRecipeIngredients(recipe)
+
+
 func _start_minigame() -> void:
+	if not InventorySingleton.RemoveByRecipe(recipe):
+		return
 	_is_active = true
+	$KneadingSprite.visible = true
 	_knead_level = 0
 	_update_level_label()
 	$InteractionElement.visible = false
@@ -101,6 +136,7 @@ func _handle_key(keycode: int) -> void:
 		return
 
 	_knead_level += 1
+	$KneadingSprite.frame = max($KneadingSprite.frame +1, 4)
 	_update_level_label()
 	if _knead_level >= goal_level:
 		_complete_minigame()
@@ -112,7 +148,10 @@ func _complete_minigame() -> void:
 	_is_active = false
 	_current_pattern = []
 	_input_index = 0
+	InventorySingleton.addAmount(recipe.result, 1)
 	knead_text.text = "[color=#8bc34a][b]Kneading done![/b][/color]"
+	_restart_lock = RESTART_DELAY
+	$KneadingSprite.visible = false
 	if player != null:
 		player.unfreeze()
 	knead_completed.emit()
@@ -153,7 +192,7 @@ func _update_level_label() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_in_range = true
-		if not _is_active:
+		if not _is_active and _can_knead():
 			knead_text.text = "Press [b]Space[/b] to knead"
 
 
