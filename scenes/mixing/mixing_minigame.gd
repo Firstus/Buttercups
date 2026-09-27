@@ -11,7 +11,7 @@ const CHECK_DELAY := 1.5
 @export
 var _sugar_required: float = 20.0
 @export
-var _flour_required: float = 150.0
+var _flour_required: float = 70.0
 @export
 var _bakingpowder_required: float = 10.0
 

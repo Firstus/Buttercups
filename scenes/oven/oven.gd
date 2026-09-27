@@ -78,7 +78,7 @@ func _start_baking(recipe: Recipe) -> void:
 	add_child(_clock)
 	_timer.start(_duration)
 	baking_started.emit()
-	$AudioStreamPlayer2D2.play(3)
+	$AudioStreamPlayer2D2.play(0)
 
 
 func _on_timer_timeout() -> void:
