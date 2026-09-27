@@ -38,11 +38,13 @@ func _process(delta: float) -> void:
 			InventorySingleton.RemoveByRecipe(recipe)
 			$MiniGame.started = true
 			$MiniGame.visible = true
-			# The player is frozen once per round; _mix_complete() unfreezes.
-			if player != null:
-				player.freeze()
 	if $MiniGame.started:
 		$InteractionElement.visible = false
+		# Re-applied every frame so nothing can leave the player unfrozen during
+		# a round. The round only ends through _mix_complete(), which clears
+		# started and unfreezes, so this cannot chain-freeze the player.
+		if player != null:
+			player.freeze()
 	else:
 		# The glow only marks the station while the recipe can actually be mixed.
 		$InteractionElement.visible = can_mix

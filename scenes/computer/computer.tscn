@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://co6xdthwrvk6o"]
 
-[ext_resource type="Texture2D" uid="uid://d8l01aprxkhu" path="res://icon.svg" id="1_difci"]
 [ext_resource type="Script" uid="uid://dnhowiwcj7ojs" path="res://scenes/computer/computer.gd" id="1_qt3pe"]
 [ext_resource type="PackedScene" path="res://scenes/computer/shop_menu.tscn" id="2_menu"]
+[ext_resource type="Texture2D" uid="uid://b4cqfyegpbwet" path="res://assets/Grafiken/Laptop.png" id="2_srgvo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(122, 255)
@@ -18,9 +18,9 @@ shape = SubResource("RectangleShape2D_5gxde")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=217558199]
 position = Vector2(2, 0)
-texture = ExtResource("1_difci")
+texture = ExtResource("2_srgvo")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=307536391]
 visible = false
 offset_left = -65.0
 offset_top = -80.0
@@ -30,4 +30,4 @@ theme_override_constants/outline_size = 8
 text = "Use computer"
 horizontal_alignment = 1
 
-[node name="Menu" parent="." instance=ExtResource("2_menu")]
+[node name="Menu" parent="." unique_id=983638154 instance=ExtResource("2_menu")]
