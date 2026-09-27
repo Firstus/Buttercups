@@ -1,29 +1,45 @@
 [gd_scene format=3 uid="uid://b0w25x2iceuhx"]
 
 [ext_resource type="Script" uid="uid://djhw2tolbw886" path="res://scenes/mixing/mixing.gd" id="1_xarer"]
+[ext_resource type="Resource" uid="uid://b688783jfuns7" path="res://assets/Recipes/gemischtes_Mehl.tres" id="2_381f4"]
 [ext_resource type="Script" uid="uid://co5mmdtxtkjt" path="res://scenes/mixing/mixing_minigame.gd" id="2_jlcg3"]
+[ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="3_bsi72"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0eb53"]
-size = Vector2(468, 130)
+size = Vector2(140, 265)
 
 [node name="Mixing" type="Node2D" unique_id=1541803609]
 script = ExtResource("1_xarer")
+recipe = ExtResource("2_381f4")
+
+[node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("3_bsi72")]
+position = Vector2(0, -80)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=572155404]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1237932379]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=345344498]
+position = Vector2(0, -22.5)
 shape = SubResource("RectangleShape2D_0eb53")
 
 [node name="MiniGame" type="Node2D" parent="." unique_id=1043104407]
 script = ExtResource("2_jlcg3")
 
 [node name="Label" type="Label" parent="MiniGame" unique_id=1404282040]
-offset_left = 88.0
-offset_top = -53.0
-offset_right = 217.0
-offset_bottom = -10.0
+offset_left = -68.0
+offset_top = -82.0
+offset_right = 61.0
+offset_bottom = -39.0
+text = "180.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Goal" type="Label" parent="MiniGame" unique_id=2140561030]
+offset_left = -62.0
+offset_top = -148.0
+offset_right = 67.0
+offset_bottom = -105.0
 text = "180.0"
 horizontal_alignment = 1
 vertical_alignment = 1

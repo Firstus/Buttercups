@@ -5,6 +5,7 @@ const FILL_INTERVAL := 0.8
 const CHECK_DELAY := 1.5
 
 @onready var _label: Label = $Label
+@onready var _goalLabel: Label = $Goal
 
 
 @export
@@ -29,6 +30,7 @@ signal mix_complete
 func _ready() -> void:
 	_current_ingredient = 0.0
 	_current_amount = 0.0
+	_goalLabel.text = str(_sugar_required)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -60,7 +62,7 @@ func _process(delta: float) -> void:
 					_current_amount >= _sugar_required * 0.9):
 					_current_amount = 0.0
 					_current_ingredient += 1
-					print(_current_ingredient)
+					_goalLabel.text = str(_flour_required)
 				elif(_current_amount > _sugar_required * 1.1):
 					_current_amount = 0.0
 			1:	
@@ -68,7 +70,7 @@ func _process(delta: float) -> void:
 					_current_amount >= _flour_required * 0.9):
 					_current_amount = 0.0
 					_current_ingredient += 1
-					print(_current_ingredient)
+					_goalLabel.text = str(_bakingpowder_required)
 				elif(_current_amount > _flour_required * 1.1):
 					_current_amount = 0.0
 			2: 	
@@ -78,6 +80,8 @@ func _process(delta: float) -> void:
 					_end_minigame()
 				elif(_current_amount > _bakingpowder_required * 1.1):
 					_current_amount = 0.0
+	if(_check_timer >= CHECK_DELAY):
+		_check_timer = 0.0
 
 func _end_minigame() -> void:
 	mix_complete.emit()

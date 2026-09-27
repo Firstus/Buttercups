@@ -66,8 +66,8 @@ position_smoothing_enabled = true
 
 [node name="EggCracking" parent="." unique_id=739322368 node_paths=PackedStringArray("player") instance=ExtResource("3_o4r6q")]
 position = Vector2(463, 557)
-player = NodePath("../Player")
 recipe = ExtResource("5_m0td3")
+player = NodePath("../Player")
 
 [node name="Knead" parent="." unique_id=971235742 node_paths=PackedStringArray("player") instance=ExtResource("5_yi3jr")]
 position = Vector2(938, 561)
