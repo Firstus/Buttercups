@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cevx1fy76752r" path="res://scenes/oven/oven.tscn" id="8_a4owj"]
 [ext_resource type="PackedScene" uid="uid://b0rhi4t10fqpf" path="res://assets/Inventar.tscn" id="8_lmija"]
 [ext_resource type="PackedScene" uid="uid://co6xdthwrvk6o" path="res://scenes/computer/computer.tscn" id="9_comp"]
+[ext_resource type="Script" uid="uid://bd5httcmxuhxm" path="res://scripts/Recipe.gd" id="9_hmhdv"]
+[ext_resource type="Resource" uid="uid://oqbimoc1pe5o" path="res://assets/Recipes/Butterkeks.tres" id="10_rryun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 resource_local_to_scene = true
@@ -79,9 +81,10 @@ player = NodePath("../Player")
 
 [node name="Oven" parent="." unique_id=1551289359 instance=ExtResource("8_a4owj")]
 position = Vector2(816, 40)
+recipes = Array[ExtResource("9_hmhdv")]([ExtResource("10_rryun")])
 
 [node name="Computer" parent="." unique_id=270510342 node_paths=PackedStringArray("player") instance=ExtResource("9_comp")]
-position = Vector2(1100, 100)
+position = Vector2(1024, 33)
 player = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1995790907]

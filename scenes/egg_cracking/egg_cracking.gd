@@ -1,17 +1,19 @@
 extends Node2D
 
+signal eggs_cracked
+
+## Eggs that must be cracked to finish a round.
 @export
 var _eggs_to_crack: int = 4
 
-var _eggs_cracked: int = 0
-
+## Node frozen while a round runs. Falls back to the "player" group when unset.
 @export
 var player: Node
 
-var _label_tween: Tween
-var _egg_fade_tween: Tween
+## Recipe cracked here. A round costs its ingredients and yields its result.
+@export var recipe : Recipe
 
-## Seconds the action must stay released after a round before another can start.
+## Seconds after a round before another one can start.
 const RESTART_DELAY := 0.5
 
 ## Seconds the cracked eggs stay visible after the last one before fading.
@@ -23,21 +25,30 @@ const EGG_FADE_DURATION := 0.5
 ## Texture the eggs switch to one by one, in scene order.
 const CRACKED_EGG_TEXTURE := preload("res://assets/Grafiken/cracked_egg.png")
 
-var _player_in_range = false
+## Station lifecycle: out of range, able to start, round running, or cooling
+## down after a round. All transitions go through _begin_round()/_end_round().
+enum State { IDLE, READY, PLAYING, COOLDOWN }
 
-## Counts down while no input arrives after a round. Leftover taps keep it
-## alive, so they cannot chain rounds and re-freeze the player.
-var _restart_lock := 0.0
+var _state: State = State.IDLE
+var _player_in_range := false
 
-@export var recipe : Recipe
+## Recipe of the running round, cached so a mid-round export change cannot
+## affect the reward.
+var _round_recipe: Recipe = null
 
-signal eggs_cracked
+## Whether this station froze the player, so freeze/unfreeze always pairs up.
+var _player_frozen := false
+
+var _cooldown := 0.0
 
 ## The egg sprites in scene order, with their whole-egg look cached so a new
 ## round can restore them.
 var _egg_sprites: Array[Sprite2D] = []
 var _egg_whole_textures: Array[Texture2D] = []
 var _egg_base_scales: Array[Vector2] = []
+
+var _label_tween: Tween
+var _egg_fade_tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,69 +62,121 @@ func _ready() -> void:
 		_egg_base_scales.append(egg.scale)
 
 
+# Single input owner for the round: the press that starts it only ever reaches
+# the READY branch, so the mini-game can never misread it as a stop attempt.
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("action_command"):
+		return
+
+	match _state:
+		State.READY:
+			if not _can_crack():
+				return
+			get_viewport().set_input_as_handled()
+			_begin_round()
+		State.PLAYING:
+			get_viewport().set_input_as_handled()
+			if $MiniGame.press():
+				_end_round()
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	_update_restart_lock(delta)
-	var can_crack: bool = recipe != null and InventorySingleton.hasRecipeIngredients(recipe)
-	if _player_in_range and _restart_lock <= 0.0 and not $MiniGame.started:
-		if (Input.is_action_just_pressed("action_command") && can_crack):
-			InventorySingleton.RemoveByRecipe(recipe)
-			_reset_eggs()
-			$MiniGame.start()
-			$MiniGame.visible = true
-			# The player is frozen once per round; _stop_minigame() unfreezes.
-			if player != null:
-				player.freeze()
-	if $MiniGame.started:
-		$Eggs.visible = true
-		$InteractionElement.visible = false
-	else:
-		# The glow only marks the station when an egg can actually be cracked.
-		$InteractionElement.visible = can_crack
+	if _state == State.COOLDOWN:
+		_cooldown -= delta
+		if _cooldown <= 0.0:
+			_enter_ready_or_idle()
+
+	# The glow only marks the station when an egg can actually be cracked.
+	$InteractionElement.visible = _state != State.PLAYING and _can_crack()
 
 
-# Keeps the restart lock alive while the action is still held/tapped.
-func _update_restart_lock(delta: float) -> void:
-	if _restart_lock <= 0.0:
+# A station freed mid-round must not leave the player frozen behind.
+func _exit_tree() -> void:
+	_set_player_frozen(false)
+
+
+func _can_crack() -> bool:
+	return recipe != null and InventorySingleton.hasRecipeIngredients(recipe)
+
+
+# Starts a round: ingredients are paid up front, the player is frozen and the
+# mini-game runs until it reports the last egg cracked.
+func _begin_round() -> void:
+	if _state == State.PLAYING:
 		return
-	if Input.is_action_pressed("action_command"):
-		_restart_lock = RESTART_DELAY
+	if not InventorySingleton.RemoveByRecipe(recipe):
+		return
+
+	_round_recipe = recipe
+	_state = State.PLAYING
+	_reset_eggs()
+	$MiniGame.visible = true
+	$MiniGame.start(_eggs_to_crack)
+	_set_player_frozen(true)
+
+
+# Single, idempotent exit point of a round.
+func _end_round() -> void:
+	if _state != State.PLAYING:
+		return
+
+	_state = State.COOLDOWN
+	_cooldown = RESTART_DELAY
+	$MiniGame.stop()
+	$MiniGame.visible = false
+	$Label.visible = false
+	_fade_eggs_out()
+	_set_player_frozen(false)
+	if _round_recipe != null:
+		InventorySingleton.addAmount(_round_recipe.result, 1)
+		_round_recipe = null
+	eggs_cracked.emit()
+
+
+func _enter_ready_or_idle() -> void:
+	_state = State.READY if _player_in_range else State.IDLE
+
+
+# Freeze and unfreeze are always issued from here, never from the mini-game,
+# so no round exit path can leave the player frozen.
+func _set_player_frozen(is_frozen: bool) -> void:
+	if _player_frozen == is_frozen:
+		return
+	_player_frozen = is_frozen
+
+	if not is_instance_valid(player) and is_inside_tree():
+		player = get_tree().get_first_node_in_group("player")
+	if not is_instance_valid(player):
+		return
+
+	if is_frozen:
+		player.freeze()
 	else:
-		_restart_lock -= delta
+		player.unfreeze()
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		_player_in_range = true
-
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		_player_in_range = false
-
-func _egg_cracked(amount: int):
+func _egg_cracked(amount: int) -> void:
 	$Label.text = "Eggs cracked: " + str(amount)
 	$Label.visible = true
 	_pop_label()
 	_crack_egg(amount - 1)
-	
-	if amount >= _eggs_to_crack:
-		_stop_minigame()
-		_fade_eggs_out()
-		eggs_cracked.emit()
-		InventorySingleton.addAmount(recipe.result, 1)
 
 
-# Stops the round and unfreezes the player. The restart lock keeps leftover
-# taps from immediately starting (and freezing) another round. The eggs are
-# faded out separately so the last crack stays visible a moment.
-func _stop_minigame() -> void:
-	$MiniGame.stop()
-	$MiniGame.visible = false
-	$Label.visible = false
-	_restart_lock = RESTART_DELAY
-	if player != null:
-		player.unfreeze()
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if not body.is_in_group("player"):
+		return
+	_player_in_range = true
+	if _state == State.IDLE:
+		_state = State.READY
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if not body.is_in_group("player"):
+		return
+	_player_in_range = false
+	if _state == State.READY:
+		_state = State.IDLE
 
 
 # Swaps one egg for the cracked texture, in scene order, and pops it.
@@ -135,6 +198,7 @@ func _reset_eggs() -> void:
 	if _egg_fade_tween and _egg_fade_tween.is_valid():
 		_egg_fade_tween.kill()
 	$Eggs.modulate.a = 1.0
+	$Eggs.visible = true
 	for i in _egg_sprites.size():
 		_egg_sprites[i].texture = _egg_whole_textures[i]
 		_egg_sprites[i].scale = _egg_base_scales[i]
@@ -152,7 +216,7 @@ func _fade_eggs_out() -> void:
 
 func _hide_eggs() -> void:
 	# A new round may have started in the meantime; its eggs must stay visible.
-	if not $MiniGame.started:
+	if _state != State.PLAYING:
 		$Eggs.visible = false
 
 

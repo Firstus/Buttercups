@@ -14,6 +14,12 @@ var goal_level: int = 5
 ## Seconds the action must stay released after a round before another can start.
 const RESTART_DELAY := 0.5
 
+## Seconds the finished dough stays visible after the last knead before fading.
+const DOUGH_HOLD_DELAY := 0.4
+
+## Seconds the dough takes to fade out at the end of a round.
+const DOUGH_FADE_DURATION := 0.5
+
 const _TOKEN_KEYS := {
 	"A": KEY_A,
 	"D": KEY_D,
@@ -44,6 +50,7 @@ var knead_level: Node
 var knead_box: Node
 
 var _shake_tween: Tween
+var _dough_fade_tween: Tween
 var _box_rest_position: Vector2
 
 # Called when the node enters the scene tree for the first time.
@@ -102,7 +109,11 @@ func _start_minigame() -> void:
 	if not InventorySingleton.RemoveByRecipe(recipe):
 		return
 	_is_active = true
+	if _dough_fade_tween and _dough_fade_tween.is_valid():
+		_dough_fade_tween.kill()
 	$KneadingSprite.visible = true
+	$KneadingSprite.frame = 0
+	$KneadingSprite.modulate.a = 1.0
 	_knead_level = 0
 	_update_level_label()
 	$InteractionElement.visible = false
@@ -136,7 +147,7 @@ func _handle_key(keycode: int) -> void:
 		return
 
 	_knead_level += 1
-	$KneadingSprite.frame = max($KneadingSprite.frame +1, 4)
+	$KneadingSprite.frame = min($KneadingSprite.frame + 1, 4)
 	_update_level_label()
 	if _knead_level >= goal_level:
 		_complete_minigame()
@@ -149,12 +160,28 @@ func _complete_minigame() -> void:
 	_current_pattern = []
 	_input_index = 0
 	InventorySingleton.addAmount(recipe.result, 1)
-	knead_text.text = "[color=#8bc34a][b]Kneading done![/b][/color]"
+	knead_text.text = ""
 	_restart_lock = RESTART_DELAY
-	$KneadingSprite.visible = false
+	_fade_dough_out()
 	if player != null:
 		player.unfreeze()
 	knead_completed.emit()
+
+
+# The finished dough lingers briefly, then fades out like the cracked eggs.
+func _fade_dough_out() -> void:
+	if _dough_fade_tween and _dough_fade_tween.is_valid():
+		_dough_fade_tween.kill()
+	_dough_fade_tween = $KneadingSprite.create_tween()
+	_dough_fade_tween.tween_interval(DOUGH_HOLD_DELAY)
+	_dough_fade_tween.tween_property($KneadingSprite, "modulate:a", 0.0, DOUGH_FADE_DURATION)
+	_dough_fade_tween.tween_callback(_hide_dough)
+
+
+func _hide_dough() -> void:
+	# A new round may have started in the meantime; its dough must stay visible.
+	if not _is_active:
+		$KneadingSprite.visible = false
 
 
 # Shows the pattern with progress: done = green, next = yellow, upcoming = gray.

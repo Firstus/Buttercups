@@ -17,11 +17,11 @@ var line_speed: int = 120
 var started = false
 
 var _line_vertical_dir = -1
+var _target := 4
 var _eggs_cracked = 0
 var _is_paused := false
 var _pause_timer := 0.0
 var _reset_to_top := false
-var _start_frame := -1
 var _shake_tween: Tween
 var _gauge_base_x := 0.0
 
@@ -43,15 +43,15 @@ func _ready() -> void:
 	_reset_line()
 
 
-# Starts a fresh round: the counter restarts at zero and the press that starts
-# the round is not also treated as a stop attempt.
-func start() -> void:
+# Starts a fresh round of the given size. The station owns all input, so the
+# press that starts the round cannot also count as a stop attempt here.
+func start(eggs_to_crack: int) -> void:
 	started = true
+	_target = eggs_to_crack
 	_eggs_cracked = 0
 	_is_paused = false
 	_pause_timer = 0.0
 	_reset_to_top = false
-	_start_frame = Engine.get_process_frames()
 	_layout_gauge()
 	_gauge_root.visible = true
 	_reset_line()
@@ -80,29 +80,38 @@ func _process(delta: float) -> void:
 			_reset_line()
 
 	_line.position.y += line_speed * delta * _line_vertical_dir
-	
+
 	if _line.position.y >= _stop_bottom.position.y:
 		_line.position.y = _stop_bottom.position.y
 		_line_vertical_dir = -1
 	if _line.position.y <= _stop_top.position.y:
 		_line.position.y = _stop_top.position.y
 		_line_vertical_dir = 1
-	
-	if Input.is_action_just_pressed("action_command") and Engine.get_process_frames() != _start_frame:
-		var stopped_y: float = _line.position.y
-		var hit: bool = stopped_y <= _zone_bottom.position.y and stopped_y >= _zone_top.position.y
-		if hit:
-			_eggs_cracked += 1
-			egg_cracked.emit(_eggs_cracked)
-			if not started:
-				return
-		else:
-			_shake_gauge()
-		# Only a hit starts the next attempt from the top. A miss continues from
-		# where the line stopped, so mashing cannot keep it out of the zone.
-		_reset_to_top = hit
-		_is_paused = true
-		_pause_timer = RESET_DELAY
+
+
+# Handles one stop attempt forwarded by the station. Returns true when the
+# round is over, so the caller decides how to finish it.
+func press() -> bool:
+	if not started or _is_paused:
+		return false
+
+	var stopped_y: float = _line.position.y
+	var hit: bool = stopped_y <= _zone_bottom.position.y and stopped_y >= _zone_top.position.y
+	if hit:
+		_eggs_cracked += 1
+		egg_cracked.emit(_eggs_cracked)
+		if _eggs_cracked >= _target:
+			stop()
+			return true
+	else:
+		_shake_gauge()
+
+	# Only a hit starts the next attempt from the top. A miss continues from
+	# where the line stopped, so mashing cannot keep it out of the zone.
+	_reset_to_top = hit
+	_is_paused = true
+	_pause_timer = RESET_DELAY
+	return false
 
 
 # Right-aligns the gauge on the screen at the wanted height.
