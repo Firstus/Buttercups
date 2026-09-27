@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://b688783jfuns7" path="res://assets/Recipes/gemischtes_Mehl.tres" id="2_381f4"]
 [ext_resource type="Script" uid="uid://co5mmdtxtkjt" path="res://scenes/mixing/mixing_minigame.gd" id="2_jlcg3"]
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="3_bsi72"]
+[ext_resource type="Texture2D" uid="uid://c4pa8a7g2mhd2" path="res://assets/Grafiken/Waage.png" id="4_bc8x0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0eb53"]
 size = Vector2(128, 256)
@@ -16,6 +17,9 @@ recipe = ExtResource("2_381f4")
 position = Vector2(0, -80)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=572155404]
+position = Vector2(0.49999967, -82.50001)
+scale = Vector2(0.8984375, 0.8984375)
+texture = ExtResource("4_bc8x0")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1237932379]
 
@@ -27,24 +31,34 @@ shape = SubResource("RectangleShape2D_0eb53")
 script = ExtResource("2_jlcg3")
 
 [node name="Label" type="Label" parent="MiniGame" unique_id=1404282040]
-offset_left = -68.0
-offset_top = -82.0
-offset_right = 61.0
-offset_bottom = -39.0
+z_index = 1
+offset_left = -58.0
+offset_top = -91.0
+offset_right = 71.0
+offset_bottom = -48.0
 text = "180.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Goal" type="Label" parent="MiniGame" unique_id=2140561030]
 offset_left = -62.0
-offset_top = -148.0
+offset_top = -193.0
 offset_right = 67.0
-offset_bottom = -105.0
-text = "180.0"
+offset_bottom = -150.0
+text = "Required:
+180.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="MiniGame" unique_id=1151869282]
+[node name="Label2" type="Label" parent="MiniGame" unique_id=979150]
+offset_left = -205.0
+offset_top = -103.0
+offset_right = -67.0
+offset_bottom = -54.0
+text = "Tap or hold Space
+to fill"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=335060908]
 
