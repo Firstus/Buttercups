@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cp4tetr3oyx8q" path="res://assets/egg_crack_gauge_proper.png" id="3_me04q"]
 [ext_resource type="Script" uid="uid://bq7q2nk0gmkha" path="res://scenes/egg_cracking/mini_game.gd" id="3_y8sme"]
 [ext_resource type="Texture2D" uid="uid://ba4hp3k4k7evr" path="res://assets/A4E277EC-FAD9-461D-BBEB-3AE324796FE4.png" id="5_lsm5j"]
+[ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="4_ind"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(128, 256)
@@ -14,20 +15,13 @@ script = ExtResource("1_1rfmu")
 
 [node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("2_y8sme")]
 
+[node name="Indicator" parent="." instance=ExtResource("4_ind")]
+
 [node name="Area2D" type="Area2D" parent="." unique_id=745983442]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1474276277]
 position = Vector2(-2.5, -38.5)
 shape = SubResource("RectangleShape2D_5gxde")
-
-[node name="Label" type="Label" parent="." unique_id=588338451]
-visible = false
-offset_left = -19.0
-offset_top = -188.0
-offset_right = 64.0
-offset_bottom = -165.0
-theme_override_constants/outline_size = 8
-text = "Crack Eggs"
 
 [node name="MiniGame" type="Node2D" parent="." unique_id=1305825780]
 script = ExtResource("3_y8sme")

@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 ## Highest opacity the indicator brightens to while breathing in and out.
 @export_range(0.0, 1.0, 0.01) var max_alpha: float = 1.0
@@ -7,7 +7,7 @@ extends Node2D
 ## Duration of one full breath (out and in), in seconds.
 @export var breath_duration: float = 2.5
 
-@onready var panel: PanelContainer = $CanvasLayer/PanelContainer
+@onready var panel: PanelContainer = $PanelContainer
 
 var _breath_tween: Tween
 

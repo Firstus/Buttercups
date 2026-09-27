@@ -15,7 +15,7 @@ signal baking_finished
 const CLOCK_SCENE := preload("res://scenes/oven/oven_clock.tscn")
 
 @onready var _clock_spawn: Marker2D = $ClockSpawn
-@onready var _label: Label = $Label
+@onready var _indicator: CanvasLayer = $Indicator
 @onready var _timer: Timer = $Timer
 
 var _player_in_range := false
@@ -27,7 +27,6 @@ var _clock: OvenClock
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_label.visible = false
 	$Area2D.body_entered.connect(_on_body_entered)
 	$Area2D.body_exited.connect(_on_body_exited)
 	_timer.timeout.connect(_on_timer_timeout)
@@ -36,10 +35,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if _is_baking and _clock != null:
 		_clock.set_progress(1.0 - _timer.time_left / _duration)
-	# The glow and prompt only show while a cookie can actually be baked.
+	# The glow and press-space prompt only show while a cookie can actually be baked.
 	var can_bake := _can_bake()
 	$InteractionElement.visible = can_bake and not _is_baking
-	_show_prompt(_player_in_range and can_bake and not _is_baking)
+	_indicator.visible = _player_in_range and can_bake and not _is_baking
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -102,7 +101,3 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_in_range = false
-
-
-func _show_prompt(is_visible: bool) -> void:
-	_label.visible = is_visible

@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://vhvvt74nvvqn" path="res://assets/Grafiken/Teig3.png" id="6_8txi7"]
 [ext_resource type="Texture2D" uid="uid://dpyg3jrwhlnf5" path="res://assets/Grafiken/Teig4.png" id="7_2xffp"]
 [ext_resource type="Texture2D" uid="uid://c51l7efgh1hjj" path="res://assets/Grafiken/Teig5.png" id="8_17k46"]
+[ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="9_ind"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(128, 256)
@@ -40,6 +41,8 @@ script = ExtResource("1_n1mkb")
 recipe = ExtResource("3_teig")
 
 [node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("2_q46e1")]
+
+[node name="Indicator" parent="." instance=ExtResource("9_ind")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=697923818]
 

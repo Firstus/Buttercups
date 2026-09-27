@@ -15,6 +15,8 @@ var player_in_range = false
 ## alive, so they cannot chain rounds and re-freeze the player.
 var _restart_lock := 0.0
 
+@onready var _indicator: CanvasLayer = $Indicator
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,14 +42,17 @@ func _process(delta: float) -> void:
 			$MiniGame.visible = true
 	if $MiniGame.started:
 		$InteractionElement.visible = false
+		_indicator.visible = false
 		# Re-applied every frame so nothing can leave the player unfrozen during
 		# a round. The round only ends through _mix_complete(), which clears
 		# started and unfreezes, so this cannot chain-freeze the player.
 		if player != null:
 			player.freeze()
 	else:
-		# The glow only marks the station while the recipe can actually be mixed.
+		# The glow and press-space prompt only mark the station while the
+		# recipe can actually be mixed.
 		$InteractionElement.visible = can_mix
+		_indicator.visible = can_mix and player_in_range
 
 
 # Keeps the restart lock alive while the action is still held/tapped.
