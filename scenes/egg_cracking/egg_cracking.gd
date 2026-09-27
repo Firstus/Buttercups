@@ -25,8 +25,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var can_crack: bool = recipe != null and InventorySingleton.hasRecipeIngredients(recipe)
 	if _player_in_range and not $MiniGame.started:
-		if (Input.is_action_just_pressed("action_command") && InventorySingleton.RemoveByRecipe(recipe)):
+		if (Input.is_action_just_pressed("action_command") && can_crack):
+			InventorySingleton.RemoveByRecipe(recipe)
 			$MiniGame.start()
 			$MiniGame.visible = true
 	if $MiniGame.started:
@@ -34,6 +36,9 @@ func _process(delta: float) -> void:
 		$InteractionElement.visible = false
 		if player != null:
 			player.freeze()
+	else:
+		# The glow only marks the station when an egg can actually be cracked.
+		$InteractionElement.visible = can_crack
 
 
 # Escape aborts a running round. Without this there was no way out of the
@@ -65,13 +70,13 @@ func _egg_cracked(amount: int):
 		InventorySingleton.addAmount(recipe.result, 1)
 
 
-# Hides the mini-game, unfreezes the player and restores the interact marker.
+# Hides the mini-game and unfreezes the player. _process restores the glow
+# if the ingredients for another round are available.
 func _stop_minigame() -> void:
 	$MiniGame.stop()
 	$MiniGame.visible = false
 	$Label.visible = false
 	$Eggs.visible = false
-	$InteractionElement.visible = true
 	if player != null:
 		player.unfreeze()
 
