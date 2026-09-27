@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="1_i0jru"]
 [ext_resource type="Resource" uid="uid://cweo5ak2l7acy" path="res://assets/Items/teig.tres" id="3_5t0hh"]
-[ext_resource type="Resource" uid="uid://bcgalkx4ax4jt" path="res://assets/Items/Blaubeeren.tres" id="4_i0jru"]
-[ext_resource type="Resource" uid="uid://bjce4nuvghvhj" path="res://assets/Items/Blaubeerkeks.tres" id="5_5mles"]
+[ext_resource type="Resource" uid="uid://bcgalkx4ax4jt" path="res://assets/Items/Schokolade.tres" id="4_i0jru"]
+[ext_resource type="Resource" uid="uid://bjce4nuvghvhj" path="res://assets/Items/Schokokeks.tres" id="5_5mles"]
 [ext_resource type="Script" uid="uid://bd5httcmxuhxm" path="res://scripts/Recipe.gd" id="6_4q6wv"]
 
 [resource]
