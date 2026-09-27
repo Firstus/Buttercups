@@ -10,8 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cevx1fy76752r" path="res://scenes/oven/oven.tscn" id="8_a4owj"]
 [ext_resource type="PackedScene" uid="uid://b0rhi4t10fqpf" path="res://assets/Inventar.tscn" id="8_lmija"]
 [ext_resource type="PackedScene" uid="uid://co6xdthwrvk6o" path="res://scenes/computer/computer.tscn" id="9_comp"]
-[ext_resource type="Script" uid="uid://bd5httcmxuhxm" path="res://scripts/Recipe.gd" id="9_hmhdv"]
-[ext_resource type="Resource" uid="uid://oqbimoc1pe5o" path="res://assets/Recipes/Butterkeks.tres" id="10_rryun"]
+[ext_resource type="PackedScene" uid="uid://cssoxm7ud58vs" path="res://scenes/Korb/korb.tscn" id="13_isaiq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 resource_local_to_scene = true
@@ -23,6 +22,9 @@ size = Vector2(1539, 62)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4qyfo"]
 size = Vector2(632.5, 233)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s81k"]
+size = Vector2(134, 131)
 
 [node name="Kitchen" type="Node2D" unique_id=1758529359]
 
@@ -56,6 +58,10 @@ shape = SubResource("RectangleShape2D_5wy2p")
 position = Vector2(697.25, 615.5)
 shape = SubResource("RectangleShape2D_4qyfo")
 
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Boundaries" unique_id=2070972529]
+position = Vector2(1265, 553.5)
+shape = SubResource("RectangleShape2D_0s81k")
+
 [node name="Player" parent="." unique_id=2021192100 instance=ExtResource("2_madu1")]
 position = Vector2(589, 347)
 max_speed = 250.0
@@ -81,7 +87,6 @@ player = NodePath("../Player")
 
 [node name="Oven" parent="." unique_id=1551289359 instance=ExtResource("8_a4owj")]
 position = Vector2(816, 40)
-recipes = Array[ExtResource("9_hmhdv")]([ExtResource("10_rryun")])
 
 [node name="Computer" parent="." unique_id=270510342 node_paths=PackedStringArray("player") instance=ExtResource("9_comp")]
 position = Vector2(1024, 33)
@@ -90,3 +95,6 @@ player = NodePath("../Player")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1995790907]
 
 [node name="Control" parent="CanvasLayer" unique_id=1274404498 instance=ExtResource("8_lmija")]
+
+[node name="Korb" parent="." unique_id=475135781 instance=ExtResource("13_isaiq")]
+position = Vector2(1264, 559)
