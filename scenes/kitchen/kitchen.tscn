@@ -65,20 +65,20 @@ anchor_mode = 0
 position_smoothing_enabled = true
 
 [node name="EggCracking" parent="." unique_id=739322368 node_paths=PackedStringArray("player") instance=ExtResource("3_o4r6q")]
-position = Vector2(463, 557)
-recipe = ExtResource("5_m0td3")
+position = Vector2(448, 552)
 player = NodePath("../Player")
+recipe = ExtResource("5_m0td3")
 
 [node name="Knead" parent="." unique_id=971235742 node_paths=PackedStringArray("player") instance=ExtResource("5_yi3jr")]
-position = Vector2(938, 561)
+position = Vector2(944, 552)
 player = NodePath("../Player")
 
 [node name="Mixing" parent="." unique_id=1541803609 node_paths=PackedStringArray("player") instance=ExtResource("7_a4owj")]
-position = Vector2(441, 115)
+position = Vector2(448, 120)
 player = NodePath("../Player")
 
 [node name="Oven" parent="." unique_id=1551289359 instance=ExtResource("8_a4owj")]
-position = Vector2(817, 41)
+position = Vector2(816, 40)
 
 [node name="Computer" parent="." unique_id=270510342 instance=ExtResource("9_comp")]
 position = Vector2(1100, 100)

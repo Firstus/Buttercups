@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ba4hp3k4k7evr" path="res://assets/A4E277EC-FAD9-461D-BBEB-3AE324796FE4.png" id="5_lsm5j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
-size = Vector2(129, 223)
+size = Vector2(128, 256)
 
 [node name="EggCracking" type="Node2D" unique_id=739322368]
 script = ExtResource("1_1rfmu")

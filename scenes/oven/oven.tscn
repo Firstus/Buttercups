@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://df8yqcoemgltr" path="res://scenes/oven/oven.gd" id="1_fubu7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
-size = Vector2(144, 273)
+size = Vector2(128, 256)
 
 [node name="Oven" type="Node2D" unique_id=1551289359]
 script = ExtResource("1_fubu7")

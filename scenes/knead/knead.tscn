@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="2_q46e1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
-size = Vector2(111, 213)
+size = Vector2(128, 256)
 
 [node name="Knead" type="Node2D" unique_id=971235742]
 script = ExtResource("1_n1mkb")
