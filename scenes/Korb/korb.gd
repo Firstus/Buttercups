@@ -9,11 +9,9 @@ func _ready() -> void:
 	$Area2D.body_entered.connect(_on_body_entered)
 	$Area2D.body_exited.connect(_on_body_exited)
 
-func _process(_delta: float) -> void:
-	$InteractionElement.visible = doesPlayerHaveCookie
-	
-
 func _unhandled_input(event: InputEvent) -> void:
+	if not _player_in_range:
+		return
 	if not event.is_action_pressed("action_command"):
 		return
 

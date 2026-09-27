@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bsmxh21tvjq1c" path="res://assets/Items/Butterkeks.tres" id="3_gc231"]
 [ext_resource type="Resource" uid="uid://bweaxgru14ih7" path="res://assets/Items/WeißeKeks.tres" id="4_8ay7n"]
 [ext_resource type="Resource" uid="uid://bjce4nuvghvhj" path="res://assets/Items/Schokokeks.tres" id="5_h0xh6"]
-[ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="5_n10mg"]
+[ext_resource type="Texture2D" uid="uid://bt2lqatk2qklb" path="res://assets/Grafiken/Korb.png" id="7_gc231"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(128, 256)
@@ -14,10 +14,12 @@ size = Vector2(128, 256)
 script = ExtResource("1_hm0cp")
 toSellItems = Array[ExtResource("2_ad561")]([ExtResource("3_gc231"), ExtResource("4_8ay7n"), ExtResource("5_h0xh6")])
 
-[node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("5_n10mg")]
-
 [node name="Area2D" type="Area2D" parent="." unique_id=1802117655]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1122280959]
-position = Vector2(0, 56.5)
+position = Vector2(0, -76)
 shape = SubResource("RectangleShape2D_5gxde")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=276079074]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("7_gc231")

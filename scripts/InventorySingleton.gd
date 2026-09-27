@@ -19,7 +19,7 @@ func addAmount(item: Item, amount: int) -> void:
 
 func hasRecipeIngredients(recipe: Recipe) -> bool:
 	for ingredient in recipe.incredients:
-		if items.get(ingredient, 0) <= 0:
+		if !items.has(ingredient):
 			return false
 	return true
 
