@@ -80,8 +80,9 @@ player = NodePath("../Player")
 [node name="Oven" parent="." unique_id=1551289359 instance=ExtResource("8_a4owj")]
 position = Vector2(816, 40)
 
-[node name="Computer" parent="." unique_id=270510342 instance=ExtResource("9_comp")]
+[node name="Computer" parent="." unique_id=270510342 node_paths=PackedStringArray("player") instance=ExtResource("9_comp")]
 position = Vector2(1100, 100)
+player = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1995790907]
 

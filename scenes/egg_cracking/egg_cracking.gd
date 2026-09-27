@@ -25,15 +25,24 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if _player_in_range:
+	if _player_in_range and not $MiniGame.started:
 		if (Input.is_action_just_pressed("action_command") && InventorySingleton.RemoveByRecipe(recipe)):
-			$MiniGame.started = true
+			$MiniGame.start()
 			$MiniGame.visible = true
 	if $MiniGame.started:
 		$Eggs.visible = true
 		$InteractionElement.visible = false
 		if player != null:
 			player.freeze()
+
+
+# Escape aborts a running round. Without this there was no way out of the
+# mini-game until the last egg was cracked, so the frozen player could be stuck.
+func _unhandled_input(event: InputEvent) -> void:
+	if $MiniGame.started and event.is_action_pressed("ui_cancel"):
+		_refund_recipe()
+		_stop_minigame()
+		get_viewport().set_input_as_handled()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -51,14 +60,28 @@ func _egg_cracked(amount: int):
 	_pop_label()
 	
 	if amount >= _eggs_to_crack:
-		$MiniGame.started = false
-		$MiniGame.visible = false
-		$Label.visible = false
-		$Eggs.visible = false
+		_stop_minigame()
 		eggs_cracked.emit()
-		if player != null:
-			player.unfreeze()
 		InventorySingleton.addAmount(recipe.result, 1)
+
+
+# Hides the mini-game, unfreezes the player and restores the interact marker.
+func _stop_minigame() -> void:
+	$MiniGame.stop()
+	$MiniGame.visible = false
+	$Label.visible = false
+	$Eggs.visible = false
+	$InteractionElement.visible = true
+	if player != null:
+		player.unfreeze()
+
+
+# Hands the spent ingredients back when the player aborts a round early.
+func _refund_recipe() -> void:
+	if recipe == null:
+		return
+	for ingredient in recipe.incredients:
+		InventorySingleton.addAmount(ingredient, 1)
 
 
 # Quick scale pop so it's obvious the counter updated.
