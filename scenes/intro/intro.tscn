@@ -1,9 +1,37 @@
 [gd_scene format=3 uid="uid://dyfjgjb18fqek"]
 
 [ext_resource type="Script" uid="uid://b32b1xmylqgl2" path="res://intro.gd" id="1_qeukb"]
+[ext_resource type="Texture2D" uid="uid://dijwb5od6dicf" path="res://assets/fabrik.png" id="2_iatiw"]
+[ext_resource type="Shader" uid="uid://dqrqwqvoxpm77" path="res://scenes/intro/background_blur.gdshader" id="3_blur"]
+[ext_resource type="Texture2D" uid="uid://lci7u80mep4w" path="res://assets/farbrik_zerstoert.png" id="4_zerst"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_intact"]
+shader = ExtResource("3_blur")
+shader_parameter/blur_amount = 0.0
+shader_parameter/max_mip_level = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_destroyed"]
+shader = ExtResource("3_blur")
+shader_parameter/blur_amount = 0.0
+shader_parameter/max_mip_level = 5.0
 
 [node name="Intro" type="Node2D" unique_id=352291498]
 script = ExtResource("1_qeukb")
+
+[node name="FactoryIntact" type="Sprite2D" parent="." unique_id=740194510]
+texture_filter = 4
+material = SubResource("ShaderMaterial_intact")
+position = Vector2(581, 332)
+scale = Vector2(0.61296296, 0.61296296)
+texture = ExtResource("2_iatiw")
+
+[node name="FactoryDestroyed" type="Sprite2D" parent="." unique_id=53746882]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 4
+material = SubResource("ShaderMaterial_destroyed")
+position = Vector2(581, 332)
+scale = Vector2(0.61296296, 0.61296296)
+texture = ExtResource("4_zerst")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=616192018]
 propagate_maximum_size = true
@@ -24,6 +52,7 @@ offset_left = 267.0
 offset_top = 63.0
 offset_right = 885.0
 offset_bottom = 499.0
+theme_override_constants/outline_size = 14
 theme_override_font_sizes/font_size = 32
 text = "Hier könnte ein Text stehen"
 autowrap_mode = 3
@@ -40,5 +69,5 @@ offset_bottom = 441.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 32
-text = "Press space to start"
+text = "Drücke Leertaste zum Starten"
 horizontal_alignment = 1
