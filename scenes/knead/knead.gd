@@ -51,6 +51,7 @@ func _ready() -> void:
 	knead_level = $CanvasLayer/KneadLevel
 	knead_text = $CanvasLayer/VBoxContainer/RichTextLabel
 	knead_box = $CanvasLayer/VBoxContainer
+	$KneadingSprite.visible = false
 	_box_rest_position = knead_box.position
 	if player == null:
 		player = get_tree().get_first_node_in_group("player")
@@ -101,6 +102,7 @@ func _start_minigame() -> void:
 	if not InventorySingleton.RemoveByRecipe(recipe):
 		return
 	_is_active = true
+	$KneadingSprite.visible = true
 	_knead_level = 0
 	_update_level_label()
 	$InteractionElement.visible = false
@@ -134,6 +136,7 @@ func _handle_key(keycode: int) -> void:
 		return
 
 	_knead_level += 1
+	$KneadingSprite.frame = max($KneadingSprite.frame +1, 4)
 	_update_level_label()
 	if _knead_level >= goal_level:
 		_complete_minigame()
@@ -148,6 +151,7 @@ func _complete_minigame() -> void:
 	InventorySingleton.addAmount(recipe.result, 1)
 	knead_text.text = "[color=#8bc34a][b]Kneading done![/b][/color]"
 	_restart_lock = RESTART_DELAY
+	$KneadingSprite.visible = false
 	if player != null:
 		player.unfreeze()
 	knead_completed.emit()

@@ -3,9 +3,37 @@
 [ext_resource type="Script" uid="uid://b1dq20pai2hqr" path="res://scenes/knead/knead.gd" id="1_n1mkb"]
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="2_q46e1"]
 [ext_resource type="Resource" uid="uid://oq27moxggetb" path="res://assets/Recipes/teig.tres" id="3_teig"]
+[ext_resource type="Texture2D" uid="uid://m3p1ja4nvh57" path="res://assets/Grafiken/Teig1.png" id="4_2cyij"]
+[ext_resource type="Texture2D" uid="uid://ctwfasm2e23wn" path="res://assets/Grafiken/Teig2.png" id="5_rlnbr"]
+[ext_resource type="Texture2D" uid="uid://vhvvt74nvvqn" path="res://assets/Grafiken/Teig3.png" id="6_8txi7"]
+[ext_resource type="Texture2D" uid="uid://dpyg3jrwhlnf5" path="res://assets/Grafiken/Teig4.png" id="7_2xffp"]
+[ext_resource type="Texture2D" uid="uid://c51l7efgh1hjj" path="res://assets/Grafiken/Teig5.png" id="8_17k46"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(128, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5gxde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2cyij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rlnbr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8txi7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2xffp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_17k46")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Knead" type="Node2D" unique_id=971235742]
 script = ExtResource("1_n1mkb")
@@ -43,3 +71,6 @@ offset_top = -27.0
 offset_right = 88.0
 offset_bottom = -4.0
 text = "Knetlevel: 0"
+
+[node name="KneadingSprite" type="AnimatedSprite2D" parent="." unique_id=717010370]
+sprite_frames = SubResource("SpriteFrames_5gxde")
