@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://dpjdfr2hy5hu7"]
 
+[ext_resource type="Texture2D" uid="uid://8dknmxunuqec" path="res://assets/Grafiken/Mehl.png" id="1_lj6gg"]
 [ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="1_qm0cy"]
 
 [resource]
 script = ExtResource("1_qm0cy")
 name = "gemischtes Mehl"
+icon = ExtResource("1_lj6gg")
 cost = 4
 metadata/_custom_type_script = "uid://bwjjrhk07p45h"

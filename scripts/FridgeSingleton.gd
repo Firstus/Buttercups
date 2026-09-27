@@ -7,7 +7,8 @@ var items: Dictionary[Item, int] = {
 	preload("res://assets/Items/Zucker.tres") as Item: 1,
 	preload("res://assets/Items/Ei.tres") as Item: 1,
 	preload("res://assets/Items/Butter.tres") as Item: 1,
-	preload("res://assets/Items/Blaubeeren.tres") as Item: 0,
+	preload("res://assets/Items/Schokolade.tres") as Item: 0,
+	preload("res://assets/Items/WeißeSchokolade.tres") as Item: 0,
 }
 
 signal OnFridgeChanged
