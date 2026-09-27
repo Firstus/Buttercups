@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" uid="uid://b1dq20pai2hqr" path="res://scenes/knead/knead.gd" id="1_n1mkb"]
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="2_q46e1"]
+[ext_resource type="Resource" uid="uid://oq27moxggetb" path="res://assets/Recipes/teig.tres" id="3_teig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(128, 256)
 
 [node name="Knead" type="Node2D" unique_id=971235742]
 script = ExtResource("1_n1mkb")
+recipe = ExtResource("3_teig")
 
 [node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("2_q46e1")]
 

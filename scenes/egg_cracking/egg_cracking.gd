@@ -10,7 +10,14 @@ var player: Node
 
 var _label_tween: Tween
 
+## Seconds the action must stay released after a round before another can start.
+const RESTART_DELAY := 0.5
+
 var _player_in_range = false
+
+## Counts down while no input arrives after a round. Leftover taps keep it
+## alive, so they cannot chain rounds and re-freeze the player.
+var _restart_lock := 0.0
 
 @export var recipe : Recipe
 
@@ -25,20 +32,32 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	_update_restart_lock(delta)
 	var can_crack: bool = recipe != null and InventorySingleton.hasRecipeIngredients(recipe)
-	if _player_in_range and not $MiniGame.started:
+	if _player_in_range and _restart_lock <= 0.0 and not $MiniGame.started:
 		if (Input.is_action_just_pressed("action_command") && can_crack):
 			InventorySingleton.RemoveByRecipe(recipe)
 			$MiniGame.start()
 			$MiniGame.visible = true
+			# The player is frozen once per round; _stop_minigame() unfreezes.
+			if player != null:
+				player.freeze()
 	if $MiniGame.started:
 		$Eggs.visible = true
 		$InteractionElement.visible = false
-		if player != null:
-			player.freeze()
 	else:
 		# The glow only marks the station when an egg can actually be cracked.
 		$InteractionElement.visible = can_crack
+
+
+# Keeps the restart lock alive while the action is still held/tapped.
+func _update_restart_lock(delta: float) -> void:
+	if _restart_lock <= 0.0:
+		return
+	if Input.is_action_pressed("action_command"):
+		_restart_lock = RESTART_DELAY
+	else:
+		_restart_lock -= delta
 
 
 # Escape aborts a running round. Without this there was no way out of the
@@ -70,13 +89,14 @@ func _egg_cracked(amount: int):
 		InventorySingleton.addAmount(recipe.result, 1)
 
 
-# Hides the mini-game and unfreezes the player. _process restores the glow
-# if the ingredients for another round are available.
+# Hides the mini-game and unfreezes the player. The restart lock keeps leftover
+# taps from immediately starting (and freezing) another round.
 func _stop_minigame() -> void:
 	$MiniGame.stop()
 	$MiniGame.visible = false
 	$Label.visible = false
 	$Eggs.visible = false
+	_restart_lock = RESTART_DELAY
 	if player != null:
 		player.unfreeze()
 

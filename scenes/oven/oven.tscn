@@ -2,12 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://cfsiufv2epym3" path="res://scenes/interaction_element/interaction_element.tscn" id="1_fak8e"]
 [ext_resource type="Script" uid="uid://df8yqcoemgltr" path="res://scenes/oven/oven.gd" id="1_fubu7"]
+[ext_resource type="Script" uid="uid://bd5httcmxuhxm" path="res://scripts/Recipe.gd" id="2_recipe"]
+[ext_resource type="Resource" uid="uid://oqbimoc1pe5o" path="res://assets/Recipes/Butterkeks.tres" id="3_butterkeks"]
+[ext_resource type="Resource" uid="uid://2f3uehc6w7u4" path="res://assets/Recipes/Blaubeerkeks.tres" id="4_blaubeerkeks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(128, 256)
 
 [node name="Oven" type="Node2D" unique_id=1551289359]
 script = ExtResource("1_fubu7")
+recipes = Array[ExtResource("2_recipe")]([ExtResource("3_butterkeks"), ExtResource("4_blaubeerkeks")])
 
 [node name="InteractionElement" parent="." unique_id=27823930 instance=ExtResource("1_fak8e")]
 
