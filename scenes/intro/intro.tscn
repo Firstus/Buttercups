@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dpo8jseynvw7o" path="res://assets/Character/walkingcycle.png" id="13_2ypwg"]
 [ext_resource type="Texture2D" uid="uid://dhx0ueros7f6s" path="res://assets/Grafiken/CharakterBöse.png" id="14_14p5w"]
 [ext_resource type="Texture2D" uid="uid://c4jl36oeb1obk" path="res://assets/soft_particle.png" id="16_soft"]
+[ext_resource type="AudioStream" uid="uid://bc35fs7b13gxi" path="res://assets/freesound_community-roaring-house-fire-wall-fall-in-7022 (1).mp3" id="17_fire"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_intact"]
 shader = ExtResource("3_blur")
@@ -46,9 +47,9 @@ emission_shape = 3
 emission_box_extents = Vector3(480, 170, 1)
 direction = Vector3(0, -1, 0)
 spread = 18.0
-initial_velocity_min = 60.0
-initial_velocity_max = 140.0
-gravity = Vector3(0, -40, 0)
+initial_velocity_min = 120.0
+initial_velocity_max = 260.0
+gravity = Vector3(0, -70, 0)
 scale_min = 0.4
 scale_max = 0.9
 color_ramp = SubResource("GradientTexture1D_fire")
@@ -74,9 +75,9 @@ emission_shape = 3
 emission_box_extents = Vector3(520, 160, 1)
 direction = Vector3(0, -1, 0)
 spread = 30.0
-initial_velocity_min = 25.0
-initial_velocity_max = 60.0
-gravity = Vector3(0, -25, 0)
+initial_velocity_min = 60.0
+initial_velocity_max = 140.0
+gravity = Vector3(0, -45, 0)
 scale_max = 2.2
 color_ramp = SubResource("GradientTexture1D_smoke")
 alpha_curve = SubResource("CurveTexture_14p5w")
@@ -182,6 +183,10 @@ text = "Drücke Leertaste zum Starten"
 horizontal_alignment = 1
 
 [node name="Voice" type="AudioStreamPlayer" parent="." unique_id=644906361]
+
+[node name="FireSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_fire")
+volume_db = -20.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1027849052]
 visible = false

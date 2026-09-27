@@ -82,6 +82,7 @@ var _factory_destroyed: Sprite2D
 var _hero: AnimatedSprite2D
 var _camera: Camera2D
 var _voice: AudioStreamPlayer
+var _fire_sound: AudioStreamPlayer
 var _tween: Tween
 var _breath_tween: Tween
 
@@ -96,6 +97,7 @@ func _ready() -> void:
 	_hero = $AnimatedSprite2D
 	_camera = $Camera2D
 	_voice = $Voice
+	_fire_sound = $FireSound
 	# Camera starts centered, which frames the scene like no camera at all.
 	_camera.position = get_viewport_rect().size * 0.5
 	_start_label.visible = false
@@ -195,6 +197,7 @@ func _play_background_beat(beat: BackgroundBeat) -> void:
 			_tween.tween_interval(clear_delay)
 			_tween.tween_property(_blur_material(_factory_intact), "shader_parameter/blur_amount", 1.0, blur_duration)
 		BackgroundBeat.DESTROYED:
+			_fire_sound.play()
 			_tween.tween_property(_factory_destroyed, "modulate:a", 1.0, background_fade_time)
 			_tween.tween_interval(clear_delay)
 			_tween.tween_property(_blur_material(_factory_destroyed), "shader_parameter/blur_amount", 1.0, blur_duration)
