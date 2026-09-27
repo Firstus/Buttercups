@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://b0oks7xindcf3"]
 
 [ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="1_msvbt"]
+[ext_resource type="Texture2D" uid="uid://drdkd3gpldpdo" path="res://assets/Grafiken/Zucker.png" id="1_t4kdo"]
 
 [resource]
 script = ExtResource("1_msvbt")
 name = "Zucker"
+icon = ExtResource("1_t4kdo")
 cost = 3
 metadata/_custom_type_script = "uid://bwjjrhk07p45h"
