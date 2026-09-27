@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c3lcwuumce3w2"]
 
-[ext_resource type="Texture2D" uid="uid://dqqayq2lllvdr" path="res://assets/949CFD1C-1C6B-4B0F-9053-163800B87464.png" id="1_bxri6"]
 [ext_resource type="Script" uid="uid://brbs7hha07mly" path="res://scenes/fridge/fridge.gd" id="1_hqalg"]
 [ext_resource type="PackedScene" path="res://scenes/fridge/fridge_menu.tscn" id="2_menu"]
+[ext_resource type="Texture2D" uid="uid://bhvlstg3rauog" path="res://assets/Grafiken/Kühlschrank.png" id="2_prlk4"]
 [ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="3_ind"]
 [ext_resource type="AudioStream" uid="uid://dbygx6q616p6o" path="res://scenes/fridge/freesound_community-kitchen-refrigerator-working-32215.mp3" id="4_xi8s0"]
 
@@ -14,13 +14,13 @@ script = ExtResource("1_hqalg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1063333324]
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_bxri6")
+texture = ExtResource("2_prlk4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1563805873]
 position = Vector2(-1.5, 82.5)
 shape = SubResource("RectangleShape2D_bxri6")
 
-[node name="Indicator" parent="." instance=ExtResource("3_ind")]
+[node name="Indicator" parent="." unique_id=1621675203 instance=ExtResource("3_ind")]
 
 [node name="Menu" parent="." unique_id=15435149 instance=ExtResource("2_menu")]
 

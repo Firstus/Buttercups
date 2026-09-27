@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cevx1fy76752r" path="res://scenes/oven/oven.tscn" id="8_a4owj"]
 [ext_resource type="PackedScene" uid="uid://b0rhi4t10fqpf" path="res://assets/Inventar.tscn" id="8_lmija"]
 [ext_resource type="PackedScene" uid="uid://co6xdthwrvk6o" path="res://scenes/computer/computer.tscn" id="9_comp"]
+[ext_resource type="Texture2D" uid="uid://dsow6abw1ivbu" path="res://assets/Grafiken/Planze1.png" id="12_rryun"]
 [ext_resource type="PackedScene" uid="uid://cssoxm7ud58vs" path="res://scenes/Korb/korb.tscn" id="13_isaiq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
@@ -26,6 +27,9 @@ size = Vector2(632.5, 233)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0s81k"]
 size = Vector2(134, 131)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6lap"]
+size = Vector2(253, 288)
+
 [node name="Kitchen" type="Node2D" unique_id=1758529359]
 
 [node name="Kueche" type="Sprite2D" parent="." unique_id=1896883199]
@@ -34,7 +38,7 @@ position = Vector2(595, 342)
 texture = ExtResource("1_rryun")
 
 [node name="Fridge" parent="." unique_id=1217047407 instance=ExtResource("7_8xxd6")]
-position = Vector2(-15, 57)
+position = Vector2(1177, 57)
 
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=1140330344]
 
@@ -61,6 +65,14 @@ shape = SubResource("RectangleShape2D_4qyfo")
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Boundaries" unique_id=2070972529]
 position = Vector2(1265, 553.5)
 shape = SubResource("RectangleShape2D_0s81k")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Boundaries" unique_id=1735377380]
+position = Vector2(-15, 655)
+shape = SubResource("RectangleShape2D_s6lap")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Boundaries" unique_id=1257207748]
+position = Vector2(1241, 655)
+shape = SubResource("RectangleShape2D_s6lap")
 
 [node name="Player" parent="." unique_id=2021192100 instance=ExtResource("2_madu1")]
 position = Vector2(589, 347)
@@ -89,7 +101,7 @@ player = NodePath("../Player")
 position = Vector2(816, 40)
 
 [node name="Computer" parent="." unique_id=270510342 node_paths=PackedStringArray("player") instance=ExtResource("9_comp")]
-position = Vector2(1024, 33)
+position = Vector2(1005, 14)
 player = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1995790907]
@@ -97,4 +109,34 @@ player = NodePath("../Player")
 [node name="Control" parent="CanvasLayer" unique_id=1274404498 instance=ExtResource("8_lmija")]
 
 [node name="Korb" parent="." unique_id=475135781 instance=ExtResource("13_isaiq")]
-position = Vector2(1264, 559)
+position = Vector2(-5, 122)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1659375693]
+position = Vector2(259, 6.0000305)
+scale = Vector2(0.18124394, 0.18124394)
+texture = ExtResource("12_rryun")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=386694625]
+position = Vector2(663, 12)
+scale = Vector2(0.18124394, 0.18124394)
+texture = ExtResource("12_rryun")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=255596139]
+position = Vector2(119.00012, 89.99999)
+scale = Vector2(0.18124394, 0.18124394)
+texture = ExtResource("12_rryun")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=155753577]
+position = Vector2(607, 548)
+scale = Vector2(0.18124394, 0.18124394)
+texture = ExtResource("12_rryun")
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1252772668]
+position = Vector2(-2, 641)
+scale = Vector2(0.4597108, 0.4597108)
+texture = ExtResource("12_rryun")
+
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=591247357]
+position = Vector2(1215, 675)
+scale = Vector2(0.4597108, 0.4597108)
+texture = ExtResource("12_rryun")
