@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dnhowiwcj7ojs" path="res://scenes/computer/computer.gd" id="1_qt3pe"]
 [ext_resource type="Script" uid="uid://bwjjrhk07p45h" path="res://scripts/Item.gd" id="2_djvcs"]
 [ext_resource type="PackedScene" path="res://scenes/computer/shop_menu.tscn" id="2_menu"]
-[ext_resource type="Texture2D" uid="uid://b4cqfyegpbwet" path="res://assets/Grafiken/Laptop.png" id="2_srgvo"]
 [ext_resource type="Resource" uid="uid://6erlwlg055e4" path="res://assets/Items/Backpulver.tres" id="3_n4ont"]
 [ext_resource type="Resource" uid="uid://c7ivbof3nosjf" path="res://assets/Items/Butter.tres" id="4_gh4r0"]
 [ext_resource type="Resource" uid="uid://bl2mmd3xbslgg" path="res://assets/Items/Ei.tres" id="5_8it8f"]
@@ -12,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://cd33if7dc2mja" path="res://assets/Items/WeißeSchokolade.tres" id="8_lmu87"]
 [ext_resource type="Resource" uid="uid://b0oks7xindcf3" path="res://assets/Items/Zucker.tres" id="9_f361i"]
 [ext_resource type="PackedScene" uid="uid://dmg1rxliw7dth" path="res://scenes/indicator/textual_indicator.tscn" id="10_ind"]
+[ext_resource type="Texture2D" uid="uid://cnlpvym8wscjb" path="res://assets/Grafiken/Laptop2.png" id="10_n4ont"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxde"]
 size = Vector2(122, 255)
@@ -28,8 +28,8 @@ shape = SubResource("RectangleShape2D_5gxde")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=217558199]
 position = Vector2(2, 0)
-texture = ExtResource("2_srgvo")
+texture = ExtResource("10_n4ont")
 
-[node name="Indicator" parent="." instance=ExtResource("10_ind")]
+[node name="Indicator" parent="." unique_id=1091328075 instance=ExtResource("10_ind")]
 
 [node name="Menu" parent="." unique_id=983638154 instance=ExtResource("2_menu")]

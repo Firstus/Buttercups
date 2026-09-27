@@ -17,7 +17,7 @@ toSellItems = Array[ExtResource("2_ad561")]([ExtResource("3_gc231"), ExtResource
 [node name="Area2D" type="Area2D" parent="." unique_id=1802117655]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1122280959]
-position = Vector2(0, -76)
+position = Vector2(0, 53)
 shape = SubResource("RectangleShape2D_5gxde")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=276079074]
